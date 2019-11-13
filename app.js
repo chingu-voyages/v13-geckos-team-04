@@ -3,6 +3,7 @@ const express    = require("express"),
 	  bodyParser = require("body-parser"),
 	  mongoose   = require("mongoose");
 	
+app.use(bodyParser.urlencoded({extended:true})); 
 app.set("view engine", "ejs");				  
 		  
 // Route for main page
@@ -13,7 +14,15 @@ app.get("/", (req, res) => {
 		{title: "Dario's Deep Database Dive", author:"Dario", review:"Databases in Depth", image: "https://images.unsplash.com/photo-1504639725590-34d0984388bd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80"}
 		]
 	res.render("landing",{reviews:reviews});
-});					  
+});		
+
+// route for handeling logic from new review form
+app.post("/", (req, res) => {
+// 	Get data from new review form
+// 	Redirect back to the landing page
+});
+
+
 // Route for sign up page			  
 app.get("/signup", (req, res) => {
 		res.render("signup");
