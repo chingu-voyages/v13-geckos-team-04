@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Landing</title>
+
+    </head>
+    <body>
+    
+   <p>
+	   Hello World, This is Code Reviews landing page! Go team! We are Sivan, Dario, and Noah!
+		</p>
+		
+		<% reviews.forEach((reviews) => { %>
+		
+		<div>
+			<h4><%= reviews.title %></h4>
+			<h5>Author: <%= reviews.author %></h5>
+			<image src="<%= reviews.image %>"></image>
+			<p>Review: <%= reviews.review %></p>
+			
+		</div>
+			
+		
+		<% }); %>
+		
+		<div>
+			<a href="/signup">To Sign Up Page</a>
+			<a href="/login">To Login Page</a>
+			<a href="/about">To About Page</a>
+			<a href="/newreview">To Create a New Review Page</a>
+		</div>
+	</body>
+</html>
