@@ -1,0 +1,62 @@
+:root {
+  --primary-color: #185770;
+  --secondary-color: #c2c9cc;
+  --freecourse-color: #65d882;
+}
+
+.coursecard {
+  border: 3px solid var(--primary-color);
+  background-color: var(--secondary-color);
+  height: 230px;
+  width: 380px;
+}
+
+.coursecard__contents {
+  margin: 0 0.6rem;
+}
+
+.coursecard__title {
+  color: var(--primary-color);
+  font-weight: 700;
+  font-size: 2rem;
+  margin-top: 0.3rem;
+}
+
+.coursecard__tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-top: 6rem;
+}
+
+.coursecard__tag {
+  color: var(--secondary-color);
+  background-color: var(--primary-color);
+  padding: 0.3rem 0.5rem;
+  border-radius: 5px;
+  margin: 0.3rem;
+}
+
+.coursecard__footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.coursecard__price {
+}
+
+.coursecard__pricefree {
+  background-color: var(--freecourse-color);
+  padding: 0.3rem 1rem;
+  border: 2px solid var(--primary-color);
+}
+
+.coursecard__starrating {
+  font-size: 1.3rem;
+}
+
+.coursecard__votecount {
+}
