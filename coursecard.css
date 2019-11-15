@@ -46,6 +46,7 @@
 }
 
 .coursecard__price {
+  font-size: 1.2rem;
 }
 
 .coursecard__pricefree {
@@ -59,4 +60,5 @@
 }
 
 .coursecard__votecount {
+  font-weight: 500;
 }
