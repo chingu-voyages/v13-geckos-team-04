@@ -3,9 +3,36 @@ const express    = require("express"),
 	  bodyParser = require("body-parser"),
 	  mongoose   = require("mongoose");
 	
-app.use(bodyParser.urlencoded({extended:true})); 
+mongoose.connect("mongodb://localhost/code_review");
+app.use(bodyParser.urlencoded({useNewUrlParser: true})); 
 app.set("view engine", "ejs");				  
 		  
+const reviewSchema = new mongoose.Schema({
+	name: String,
+	image: String,
+	author: String,
+	review: String	
+});
+
+const Review = mongoose.model("Review", reviewSchema);
+
+Review.create(
+	{
+		title: "Test",
+		author: "Dahl",
+		review: "It's great!",
+		image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"
+		
+	}, (err, review) => {
+		if(err) {
+			console.log("Error");
+		} else {
+			console.log("New Review Created");
+			console.log(review);
+		}
+	});
+
+
 // Route for main page
 app.get("/", (req, res) => {
 	const reviews = [
@@ -43,6 +70,6 @@ app.get("/newreview", (req, res) => {
 
 // Server listening 					  
 const port = process.env.PORT || 3000;
-app.listen(port, function () {
+app.listen(port, () => {
     console.log("Code Review is up and running!");
 });
