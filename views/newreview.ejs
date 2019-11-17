@@ -1,77 +1,58 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Add course</title>
-        <link rel="stylesheet" type="text/css" href="css/style.css" />
-		<link href="https://fonts.googleapis.com/css?family=Bitter" rel="stylesheet" type="text/css" />
-        <!-- Font Awesome Icon Library -->
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    </head>
-    <body>
-    	<% include ../header.html %>
-
-		<h1 class="h1">Add a New Course</h1>
-		<h2><% tags[1] %></h2>					
-    	<main class="addCourseMain">
-			<form action="" name="addCourse" class="addCourseForm">
-				<input type="text" class="addCourseForm__textInput" name="title" placeholder="Course title:" />
-				<input type="text" class="addCourseForm__textInput" name="author" placeholder="Author:" />
-				<input type="text" class="addCourseForm__textInput" name="authorUrl" placeholder="Author website (Optional):" />
-				<input type="text" class="addCourseForm__textInput" name="courseUrl" placeholder="Course website:" />
-				<input type="text" class="addCourseForm__textInput" name="imageUrl" placeholder="Image URL (Optional):" />
-				
-				<div class="spacer20"></div>
-				
-				<div class="addCourseTags">
-					<select class="addCourseTags__select">
-						<option value="none">Select up to 5 tech tags</option>
-
-						<% tags.forEach ((tag) => { %>
-						<option value="<%= tag.id %>"><%= tag.title %></option> 
-						<% }); %>
-
-					</select>
-				</div>
-				
-				<div class="spacer20"></div>
-
-				<textarea name="review" class="addCourseForm__textArea" placeholder="Tell us more about the course:"></textarea>
-				<div class="addCoursePriceLine">
-					<input type="text" class="addCourseForm__textInput addCourseForm__textInput--short" name="price" placeholder="Price:" />
-					<input type="checkbox" class="addCourseForm__checkbox" name="isFree"><label for="isFree" class="addCourseForm__label">Free!</label>
-				</div>
-				
-				<div class="spacer20"></div>
-
-				<h2 class="h2">How would you rate this course?</h2>
-				
-				<div class="spacer20"></div>
-				
-				<div class="addCourseStarReview">
-					<span>Your rating:</span>  
-					<span class="fa fa-star checked"></span>
-					<span class="fa fa-star checked"></span>
-					<span class="fa fa-star checked"></span>
-					<span class="fa fa-star"></span>
-					<span class="fa fa-star"></span>
-				</div>
-				
-				<div class="spacer20"></div>
-				<input type="text" class="addCourseForm__textInput" name="reviewTitle" placeholder="Review title (Optional):" />
-				<textarea name="reviewDetails" class="addCourseForm__textArea" placeholder="Please give more details (Optional):"></textarea>
-
-				<div class="spacer20"></div>
-				<input class="addCourseForm__submit" type="submit" />
-			</form>
-		</main>
-		
-		
-		<footer>
-			<a href="/">Back to Main page</a>
-			<a href="/signup">To Sign Up Page</a>
-			<a href="/about">To About Page</a>
-			<a href="/login">To Login Page</a>
-		</footer>
-		
-	</body>
+   <head>
+      <title>Add course</title>
+      <link rel="stylesheet" type="text/css" href="css/newReview.css" />
+   </head>
+   <body>
+      <% include ../header.html %>
+      <h1 class="h1">Add a New Course</h1>
+      <h2><% tags[1] %></h2>
+      <main class="addCourseMain">
+         <form action="" name="addCourse" class="addCourseForm">
+            <input type="text" class="addCourseForm__textInput" name="title" placeholder="Course title:" />
+            <input type="text" class="addCourseForm__textInput" name="author" placeholder="Author:" />
+            <input type="text" class="addCourseForm__textInput" name="authorUrl" placeholder="Author website (Optional):" />
+            <input type="text" class="addCourseForm__textInput" name="courseUrl" placeholder="Course website:" />
+            <input type="text" class="addCourseForm__textInput" name="imageUrl" placeholder="Image URL (Optional):" />
+            <div class="spacer20"></div>
+            <div class="addCourseTags">
+               <select class="addCourseTags__select">
+                  <option value="none">Select up to 5 tech tags</option>
+                  <% tags.forEach ((tag) => { %>
+                  <option value="<%= tag.id %>"><%= tag.title %></option>
+                  <% }); %>
+               </select>
+            </div>
+            <div class="spacer20"></div>
+            <textarea name="review" class="addCourseForm__textArea" placeholder="Tell us more about the course:"></textarea>
+            <div class="addCoursePriceLine">
+               <input type="text" class="addCourseForm__textInput addCourseForm__textInput--short" name="price" placeholder="Price:" />
+               <input type="checkbox" class="addCourseForm__checkbox" name="isFree"><label for="isFree" class="addCourseForm__label">Free!</label>
+            </div>
+            <div class="spacer20"></div>
+            <h2 class="h2">How would you rate this course?</h2>
+            <div class="spacer20"></div>
+            <div class="addCourseStarReview">
+               <span>Your rating:</span>  
+               <img src="./assets/star-filled.svg" />
+               <img src="./assets/star-filled.svg" />
+               <img src="./assets/star-filled.svg" />
+               <img src="./assets/star-filled.svg" />
+               <img src="./assets/star-empty.svg" />
+            </div>
+            <div class="spacer20"></div>
+            <input type="text" class="addCourseForm__textInput" name="reviewTitle" placeholder="Review title (Optional):" />
+            <textarea name="reviewDetails" class="addCourseForm__textArea" placeholder="Please give more details (Optional):"></textarea>
+            <div class="spacer20"></div>
+            <input class="addCourseForm__submit" type="submit" />
+         </form>
+      </main>
+      <footer>
+         <a href="/">Back to Main page</a>
+         <a href="/signup">To Sign Up Page</a>
+         <a href="/about">To About Page</a>
+         <a href="/login">To Login Page</a>
+      </footer>
+   </body>
 </html>
