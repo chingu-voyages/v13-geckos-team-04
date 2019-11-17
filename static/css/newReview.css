@@ -1,0 +1,75 @@
+.addCourseMain {
+	display: flex;
+	justify-content: center;
+}
+.addCourseForm {
+	display: flex;
+	flex-direction: column;
+	width: 80%;
+
+}
+
+.addCourseForm__textInput {
+	padding: 0 8px;
+	width: 100%;
+	line-height: 25px;
+	margin: 2px 0;
+	border: 1px solid #94b4c1;
+	border-radius: 6px;
+}
+
+.addCourseForm__textInput--short {
+	width: 20%;
+}
+
+.addCourseForm__textInput::placeholder {
+	color: #94b4c1;
+}
+
+.addCourseForm__textArea {
+	padding: 0 8px;
+	width: 100%;
+	height: 8rem;
+	line-height: 25px;
+	margin: 2px 0;
+	border: 1px solid #94b4c1;
+	border-radius: 6px;
+	resize: none;
+}
+
+.addCourseForm__textArea::placeholder {
+	color: #94b4c1;
+}
+
+.addCourseTags__select {
+	padding: 4px;
+	line-height: 25px;
+	margin: 2px 0;
+	border: 1px solid #94b4c1;
+	border-radius: 6px;
+	color: #94b4c1;
+}
+
+.addCoursePriceLine {
+	display: flex;
+	align-items: center;
+}
+
+.addCourseForm__checkbox {
+	margin-left: 10px;
+	zoom: 1.2;
+}
+
+.addCourseForm__submit {
+	width: 100%;
+	line-height: 30px;
+	border: 1px solid;
+	border-style: outset;
+	border-radius: 6px;
+	padding: 8px;
+	cursor: pointer;
+}
+
+.spacer20 {
+	height: 20px;
+}

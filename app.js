@@ -3,9 +3,18 @@ const express    = require("express"),
 	  bodyParser = require("body-parser"),
 	  mongoose   = require("mongoose");
 	
+<<<<<<< HEAD
 mongoose.connect("mongodb://localhost/code_review");
 app.use(bodyParser.urlencoded({useNewUrlParser: true})); 
 app.set("view engine", "ejs");				  
+=======
+app.use(bodyParser.urlencoded({extended:true})); 
+app.set("view engine", "ejs");	
+
+// Serve static files
+var path = require('path');
+app.use(express.static(path.join(__dirname, 'static')));			  
+>>>>>>> development
 		  
 const reviewSchema = new mongoose.Schema({
 	name: String,
@@ -64,7 +73,12 @@ app.get("/about", (req, res) => {
 });
 // Route for new review page
 app.get("/newreview", (req, res) => {
-		res.render("newreview");
+		const tags = [{id: 1, title: "CSS"}, 
+					{id: 2, title: "JS"}, 
+					{id: 3, title: "NodeJS"}, 
+					{id: 4, title: "Express"}, 
+					{id: 5, title: "MongoDB"}];
+		res.render("newreview", {tags: tags});
 });
 
 
