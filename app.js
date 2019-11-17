@@ -14,10 +14,19 @@ app.use(express.static(path.join(__dirname, 'static')));
 // 		  Mongo Schema for new reviews, eventually break off into seperate folder to req
 const reviewSchema = new mongoose.Schema({
 	title: String,
-	image: String,
+	imageUrl: String,
 	author: String,
-	review: String	
+	authorUrl: String,
+	courseUrl: String,
+	price: Number,
+	isFree: Boolean,
+	reviewTitle: String,
+	reviewDetails: String
 });
+
+		
+
+
 
 const Review = mongoose.model("Review", reviewSchema);
 
@@ -55,6 +64,12 @@ app.get("/", (req, res) => {
 
 // route for handeling logic from new review form
 app.post("/", (req, res) => {
+	let title = req.body.title;
+	let author = req.body.author;
+	let review = req.body.review;
+	let image = req.body.image;
+	
+	res.redirct("/");
 // 	Get data from new review form
 // 	Redirect back to the landing page
 });
