@@ -14,10 +14,12 @@ app.use(express.static(path.join(__dirname, 'static')));
 // 		  Mongo Schema for new reviews, eventually break off into seperate folder to req
 const reviewSchema = new mongoose.Schema({
 	title: String,
+	description: String,
 	imageUrl: String,
 	author: String,
 	authorUrl: String,
 	courseUrl: String,
+	review: String,
 	price: Number,
 	isFree: Boolean,
 	reviewTitle: String,
@@ -67,27 +69,29 @@ app.post("/", (req, res) => {
 // 	Get fields from form and save in newReview variable
 	const title = req.body.title;
 	const author = req.body.author;
+	const description = req.body.description;
 	const authorUrl = req.body.authorUrl;
 	const reviewTitle = req.body.reviewTitle;
-	const reviewDetail = req.body.reviewDetail;
+	const reviewDetails = req.body.reviewDetails;
 	const price = req.body.price;
 	const isFree = req.body.isFree;
 	const courseUrl = req.body.courseUrl;	
 	const imageUrl = req.body.imageUrl;
 // 	Save as new var object
-	const newReview = {title: title, author: author, authorUrl: authorUrl, reviewTitle: reviewTitle, reviewDetail: reviewDetail, price: price, isFree: isFree, courseUrl: courseUrl, imageUrl: imageUrl};
+	const newReview = {title: title, author: author, authorUrl: authorUrl, reviewTitle: reviewTitle, reviewDetails: reviewDetails, price: price, isFree: isFree, courseUrl: courseUrl, imageUrl: imageUrl, description: description };
 // 	Add to data base
 	Review.create(newReview, (err, newlyCreated) => {
 		if(err) {
 			console.log(err);
 		} else {
+			console.log(newlyCreated);
 			res.redirect("/")
 		}
 		
 	})
 	
 	
-	res.redirct("/");
+	
 // 	Get data from new review form
 // 	Redirect back to the landing page
 });
