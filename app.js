@@ -4,7 +4,11 @@ const express    = require("express"),
 	  mongoose   = require("mongoose");
 	
 app.use(bodyParser.urlencoded({extended:true})); 
-app.set("view engine", "ejs");				  
+app.set("view engine", "ejs");	
+
+// Serve static files
+var path = require('path');
+app.use(express.static(path.join(__dirname, 'static')));			  
 		  
 // Route for main page
 app.get("/", (req, res) => {
@@ -37,7 +41,12 @@ app.get("/about", (req, res) => {
 });
 // Route for new review page
 app.get("/newreview", (req, res) => {
-		res.render("newreview");
+		const tags = [{id: 1, title: "CSS"}, 
+					{id: 2, title: "JS"}, 
+					{id: 3, title: "NodeJS"}, 
+					{id: 4, title: "Express"}, 
+					{id: 5, title: "MongoDB"}];
+		res.render("newreview", {tags: tags});
 });
 
 
