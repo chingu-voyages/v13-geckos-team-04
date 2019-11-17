@@ -41,7 +41,12 @@ app.get("/about", (req, res) => {
 });
 // Route for new review page
 app.get("/newreview", (req, res) => {
-		res.render("newreview");
+		const tags = [{id: 1, title: "CSS"}, 
+					{id: 2, title: "JS"}, 
+					{id: 3, title: "NodeJS"}, 
+					{id: 4, title: "Express"}, 
+					{id: 5, title: "MongoDB"}];
+		res.render("newreview", {tags: tags});
 });
 
 
