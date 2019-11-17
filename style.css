@@ -4,6 +4,7 @@
 	padding: 0;
 	border: 0;
 	outline: 0;
+	text-align: center;
 }
 
 .header {
@@ -49,4 +50,9 @@
 
 .profileBtn {
 	margin-left: 1em;
+}
+
+.addCourseMain {
+	display: flex;
+	justify-content: center;
 }

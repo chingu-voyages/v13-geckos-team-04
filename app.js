@@ -4,7 +4,11 @@ const express    = require("express"),
 	  mongoose   = require("mongoose");
 	
 app.use(bodyParser.urlencoded({extended:true})); 
-app.set("view engine", "ejs");				  
+app.set("view engine", "ejs");	
+
+// Serve static files
+var path = require('path');
+app.use(express.static(path.join(__dirname, 'static')));			  
 		  
 // Route for main page
 app.get("/", (req, res) => {
