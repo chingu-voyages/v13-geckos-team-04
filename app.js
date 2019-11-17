@@ -3,7 +3,7 @@ const express    = require("express"),
 	  bodyParser = require("body-parser"),
 	  mongoose   = require("mongoose");
 	
-mongoose.connect("mongodb://localhost/code_review");
+mongoose.connect("mongodb://localhost:27017/code_review", {useNewUrlParser: true, useUnifiedTopology: true});
 app.use(bodyParser.urlencoded({extended:true})); 
 app.set("view engine", "ejs");	
 
@@ -64,10 +64,28 @@ app.get("/", (req, res) => {
 
 // route for handeling logic from new review form
 app.post("/", (req, res) => {
-	let title = req.body.title;
-	let author = req.body.author;
-	let review = req.body.review;
-	let image = req.body.image;
+// 	Get fields from form and save in newReview variable
+	const title = req.body.title;
+	const author = req.body.author;
+	const authorUrl = req.body.authorUrl;
+	const reviewTitle = req.body.reviewTitle;
+	const reviewDetail = req.body.reviewDetail;
+	const price = req.body.price;
+	const isFree = req.body.isFree;
+	const courseUrl = req.body.courseUrl;	
+	const imageUrl = req.body.imageUrl;
+// 	Save as new var object
+	const newReview = {title: title, author: author, authorUrl: authorUrl, reviewTitle: reviewTitle, reviewDetail: reviewDetail, price: price, isFree: isFree, courseUrl: courseUrl, imageUrl: imageUrl};
+// 	Add to data base
+	Review.create(newReview, (err, newlyCreated) => {
+		if(err) {
+			console.log(err);
+		} else {
+			res.redirect("/")
+		}
+		
+	})
+	
 	
 	res.redirct("/");
 // 	Get data from new review form
