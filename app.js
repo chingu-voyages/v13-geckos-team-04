@@ -68,6 +68,10 @@ app.get("/courses/new", (req, res) => {
 		res.render("newreview", {tags: tags});
 });
 	
+	app.get("/courses/:id", (req, res) => {
+	res.render("show");
+})
+	
 	// const reviews = [
 	// 	{title: "Noah's Normal Node Nook", author:"Noah", review:"Course about Node", image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"},
 	// 	{title: "Shivan's Super Scala Story", author:"Shivan", review:"Scala information", image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1352&q=80"},
@@ -116,6 +120,7 @@ app.get("/login", (req, res) => {
 app.get("/about", (req, res) => {
 		res.render("about");
 });
+
 
 
 
