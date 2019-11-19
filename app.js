@@ -43,9 +43,12 @@ const Review = mongoose.model("Review", reviewSchema);
 // 		}
 // 	});
 
-
-// Route for main page
 app.get("/", (req, res) => {
+	res.redirect("/courses")
+})
+
+// Index - Show all courses
+app.get("/courses", (req, res) => {
 // 	Get all reviews from DB 
 	Review.find({}, (err, allReviews) => {
 		if (err) {
@@ -55,6 +58,15 @@ app.get("/", (req, res) => {
 		}
 	});
 	
+	// New - Route to show form for new courses
+app.get("/courses/new", (req, res) => {
+		const tags = [{id: 1, title: "CSS"}, 
+					{id: 2, title: "JS"}, 
+					{id: 3, title: "NodeJS"}, 
+					{id: 4, title: "Express"}, 
+					{id: 5, title: "MongoDB"}];
+		res.render("newreview", {tags: tags});
+});
 	
 	// const reviews = [
 	// 	{title: "Noah's Normal Node Nook", author:"Noah", review:"Course about Node", image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"},
@@ -64,8 +76,8 @@ app.get("/", (req, res) => {
 	// 
 });		
 
-// route for handeling logic from new review form
-app.post("/", (req, res) => {
+// Create - Route to handle info from form and add a new course to DB
+app.post("/courses", (req, res) => {
 // 	Get fields from form and save in newReview variable
 	const title = req.body.title;
 	const author = req.body.author;
@@ -89,11 +101,6 @@ app.post("/", (req, res) => {
 		}
 		
 	})
-	
-	
-	
-// 	Get data from new review form
-// 	Redirect back to the landing page
 });
 
 
@@ -109,15 +116,7 @@ app.get("/login", (req, res) => {
 app.get("/about", (req, res) => {
 		res.render("about");
 });
-// Route for new review page
-app.get("/newreview", (req, res) => {
-		const tags = [{id: 1, title: "CSS"}, 
-					{id: 2, title: "JS"}, 
-					{id: 3, title: "NodeJS"}, 
-					{id: 4, title: "Express"}, 
-					{id: 5, title: "MongoDB"}];
-		res.render("newreview", {tags: tags});
-});
+
 
 
 // Server listening 					  
