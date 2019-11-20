@@ -4,9 +4,23 @@
 	   Hello World, This is Code Reviews landing page! Go team! We are Sivan, Dario, and Noah!
 		</p>
 		
+<div class="centered">
 		<% reviews.forEach((reviews) => { %>
+ 
+            <section class="cards">
+                 
+                <article class="card">
+                   <h4><%= reviews.title %></h4>
+					<image src="<%= reviews.imageUrl %>"></image>
+					<a href="/courses/<%= reviews._id %>">More Info!</a>
+                </article><!-- /card-one -->
+ 
+    
+ 
+   			 </section>
+
 		
-		<div style="flex">
+		<!-- <div>
 			<h4><%= reviews.title %></h4>
 			<h5>Course Description: <%= reviews.description %></h5>
 			<h5>Author: <%= reviews.author %></h5>
@@ -18,11 +32,11 @@
 			<h5><a href="<%= reviews.courseUrl %>">Link to Course!</a></h5>
 			<a href="/courses/<%= reviews._id %>">More Info!</a>
 			
-		</div>
-			
-		
+		</div> -->
+					
 		<% }); %>
-		
+	
+		</div>
 		<div>
 			<a href="/signup">To Sign Up Page</a>
 			<a href="/login">To Login Page</a>

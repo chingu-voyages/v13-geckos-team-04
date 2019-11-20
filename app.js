@@ -44,7 +44,7 @@ const Review = mongoose.model("Review", reviewSchema);
 // 	});
 
 app.get("/", (req, res) => {
-	res.redirect("/courses")
+	res.redirect("/courses");
 })
 
 // Index - Show all courses
@@ -52,7 +52,7 @@ app.get("/courses", (req, res) => {
 // 	Get all reviews from DB 
 	Review.find({}, (err, allReviews) => {
 		if (err) {
-			console.log(err)
+			console.log(err);
 		} else {
 			res.render("index",{reviews:allReviews});
 		}
@@ -71,7 +71,7 @@ app.get("/courses/new", (req, res) => {
 // 	Show - Show specific course with additional details by using ID to grab it from the data base
 	app.get("/courses/:id", (req, res) => {
 	res.render("show");
-})
+});
 	
 	// const reviews = [
 	// 	{title: "Noah's Normal Node Nook", author:"Noah", review:"Course about Node", image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"},
@@ -107,6 +107,9 @@ app.post("/courses", (req, res) => {
 		
 	})
 });
+
+
+
 
 
 // Route for sign up page			  
