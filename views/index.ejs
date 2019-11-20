@@ -6,7 +6,7 @@
 		
 		<% reviews.forEach((reviews) => { %>
 		
-		<div>
+		<div style="flex">
 			<h4><%= reviews.title %></h4>
 			<h5>Course Description: <%= reviews.description %></h5>
 			<h5>Author: <%= reviews.author %></h5>
@@ -16,6 +16,7 @@
 			<p>Review Details: <%= reviews.reviewDetails %></p>
 			<h5>Price: <%= reviews.price %></h5>
 			<h5><a href="<%= reviews.courseUrl %>">Link to Course!</a></h5>
+			<a href="/courses/<%= reviews._id %>">More Info!</a>
 			
 		</div>
 			

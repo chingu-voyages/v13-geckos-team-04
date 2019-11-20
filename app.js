@@ -54,7 +54,7 @@ app.get("/courses", (req, res) => {
 		if (err) {
 			console.log(err)
 		} else {
-			res.render("landing",{reviews:allReviews});
+			res.render("index",{reviews:allReviews});
 		}
 	});
 	
@@ -68,6 +68,7 @@ app.get("/courses/new", (req, res) => {
 		res.render("newreview", {tags: tags});
 });
 	
+// 	Show - Show specific course with additional details by using ID to grab it from the data base
 	app.get("/courses/:id", (req, res) => {
 	res.render("show");
 })
