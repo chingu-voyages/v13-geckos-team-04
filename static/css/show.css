@@ -1,0 +1,8 @@
+.hr {
+	border: 1px dotted #94b4c1;
+    margin: 30px 0;
+}
+
+button {
+	cursor: pointer;
+}

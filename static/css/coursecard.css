@@ -7,7 +7,7 @@
 .coursecard {
   border: 3px solid var(--primary-color);
   background-color: var(--secondary-color);
-  height: 230px;
+  min-height: 230px;
   width: 380px;
 }
 
@@ -16,6 +16,13 @@
 }
 
 .coursecard__title {
+  color: var(--primary-color);
+  font-weight: 700;
+  font-size: 2rem;
+  margin-top: 0.3rem;
+}
+
+.coursecard__link {
   color: var(--primary-color);
   font-weight: 700;
   font-size: 2rem;
@@ -62,3 +69,4 @@
 .coursecard__votecount {
   font-weight: 500;
 }
+

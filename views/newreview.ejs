@@ -3,7 +3,7 @@
 		<h1 class="h1">Add a New Course</h1>
 		<h2><% tags[1] %></h2>					
     	<main class="addCourseMain">
-			<form action="/" method="POST" name="addCourse" class="addCourseForm">
+			<form action="/courses" method="POST" name="addCourse" class="addCourseForm">
 				<input type="text" class="addCourseForm__textInput" name="title" placeholder="Course title:" />
 				<input type="text" class="addCourseForm__textInput" name="author" placeholder="Author:" />
 				<input type="text" class="addCourseForm__textInput" name="authorUrl" placeholder="Author website (Optional):" />
@@ -32,36 +32,11 @@
 				</div>
 				
 				<div class="spacer20"></div>
-
-				<h2 class="h2">How would you rate this course?</h2>
-				
-				<div class="spacer20"></div>
-				
-				<div class="addCourseStarReview">
-					<span>Your rating:</span>  
-					<span class="fa fa-star checked"></span>
-					<span class="fa fa-star checked"></span>
-					<span class="fa fa-star checked"></span>
-					<span class="fa fa-star"></span>
-					<span class="fa fa-star"></span>
-				</div>
-				
-				<div class="spacer20"></div>
-				<input type="text" class="addCourseForm__textInput" name="reviewTitle" placeholder="Review title (Optional):" />
-				<textarea name="reviewDetails" class="addCourseForm__textArea" placeholder="Please give more details (Optional):"></textarea>
-
-				<div class="spacer20"></div>
 				<input class="addCourseForm__submit" type="submit" />
 			</form>
 		</main>
-		
-		
-		<footer>
-			<a href="/courses">Back to Main page</a>
-			<a href="/signup">To Sign Up Page</a>
-			<a href="/about">To About Page</a>
-			<a href="/login">To Login Page</a>
-		</footer>
+			
+	<% include partials/footer %>
 		
 	</body>
 </html>

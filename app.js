@@ -57,6 +57,7 @@ app.get("/courses", (req, res) => {
 			res.render("landing",{reviews:allReviews});
 		}
 	});
+});		
 	
 	// New - Route to show form for new courses
 app.get("/courses/new", (req, res) => {
@@ -68,18 +69,20 @@ app.get("/courses/new", (req, res) => {
 		res.render("newreview", {tags: tags});
 });
 	
-	app.get("/courses/:id", (req, res) => {
-	res.render("show");
-})
-	
-	// const reviews = [
-	// 	{title: "Noah's Normal Node Nook", author:"Noah", review:"Course about Node", image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"},
-	// 	{title: "Shivan's Super Scala Story", author:"Shivan", review:"Scala information", image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1352&q=80"},
-	// 	{title: "Dario's Deep Database Dive", author:"Dario", review:"Databases in Depth", image: "https://images.unsplash.com/photo-1504639725590-34d0984388bd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80"}
-	// 	]
-	// 
-});		
-
+app.get("/courses/:id", (req, res) => {
+	var id = req.params.id;
+	Review.findById(id, (err, course) => {
+		if (err) {
+			console.log(err);
+		} else if (course == null) {
+			console.log('No course found with id ' + id);
+			return res.redirect("/error");
+		} else {
+			res.render("show", {course: course});
+		}
+	});
+});
+		
 // Create - Route to handle info from form and add a new course to DB
 app.post("/courses", (req, res) => {
 // 	Get fields from form and save in newReview variable
@@ -101,7 +104,7 @@ app.post("/courses", (req, res) => {
 			console.log(err);
 		} else {
 			console.log(newlyCreated);
-			res.redirect("/")
+			res.redirect("/courses");
 		}
 		
 	})
@@ -120,7 +123,9 @@ app.get("/login", (req, res) => {
 app.get("/about", (req, res) => {
 		res.render("about");
 });
-
+app.get("/error", (req, res) => {
+		res.render("error");
+});
 
 
 
