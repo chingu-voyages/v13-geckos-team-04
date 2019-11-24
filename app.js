@@ -84,7 +84,7 @@ app.get("/courses/:id", (req, res) => {
 });
 		
 // Create - Route to handle info from form and add a new course to DB
-app.post("/", (req, res) => {
+app.post("/courses", (req, res) => {
 // 	Get fields from form and save in newReview variable
 	const title = req.body.title;
 	const author = req.body.author;
