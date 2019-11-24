@@ -1,52 +1,74 @@
 <% include partials/header %>
-   
-	<p>
-		this will be the show page
-</p>
 
-<!-- 
-  <div class="coursecard">
-    <div class="coursecard__contents">
-      <div class="coursecard__title">Get Sassy with SASS</div>
-      <div class="coursecard__tags">
-        <div class="coursecard__tag">CSS</div>
-        <div class="coursecard__tag">SASS</div>
-        <div class="coursecard__tag">Styling</div>
-      </div>
-      <div class="coursecard__footer">
-        <div class="coursecard__price">$19.99</div>
-        <div class="coursecard__starrating">
-          <img src="./assets/star-filled.svg" />
-          <img src="./assets/star-filled.svg" />
-          <img src="./assets/star-filled.svg" />
-          <img src="./assets/star-filled.svg" />
-          <img src="./assets/star-empty.svg" />
-        </div>
-        <div class="coursecard__votecount">(37 votes)</div>
-      </div>
+    <h1 class="h1"><%= course.title %></h1>
+    <div class="coursecard__starrating">
+      <img src="/assets/star-filled.svg" />
+      <img src="/assets/star-filled.svg" />
+      <img src="/assets/star-filled.svg" />
+      <img src="/assets/star-filled.svg" />
+      <img src="/assets/star-empty.svg" />
     </div>
-  </div>
 
-  <div class="coursecard">
-    <div class="coursecard__contents">
-      <div class="coursecard__title">Untagle Spaghetti Code</div>
-      <div class="coursecard__tags">
-        <div class="coursecard__tag">Best Practices</div>
-        <div class="coursecard__tag">Clean Code</div>
-        <div class="coursecard__tag">OOP</div>
-      </div>
-      <div class="coursecard__footer">
-        <div class="coursecard__pricefree">Free!</div>
-        <div class="coursecard__starrating">
-          <img src="./assets/star-filled.svg" />
-          <img src="./assets/star-filled.svg" />
-          <img src="./assets/star-filled.svg" />
-          <img src="./assets/star-half.svg" />
-          <img src="./assets/star-empty.svg" />
-        </div>
-        <div class="coursecard__votecount">(37 votes)</div>
-      </div>
+<h3>By: <%= course.author %></h3>
+
+    <div>
+      <%= course.description %>
     </div>
-  </div>
-</body>
-</html> -->
+
+<div>$<%= course.price %></div>
+<div>Check it out <b>here</b>: <a href="<%= course.courseUrl %>" target="_blank"><%= course.courseUrl %></a></div>
+
+<img src="<%= course.imageUrl %>" /> 
+<hr class="hr"/> 
+
+<h2>User Reviews</h2>
+<Button>Add a review</Button>
+
+<div>
+  <img src="/assets/star-filled.svg" />
+  <img src="/assets/star-filled.svg" />
+  <img src="/assets/star-filled.svg" />
+  <img src="/assets/star-filled.svg" />
+  <img src="/assets/star-filled.svg" />
+  <progress id="file" max="100" value="100"> 100% </progress>
+</div>
+
+<div>
+  <img src="/assets/star-filled.svg" />
+  <img src="/assets/star-filled.svg" />
+  <img src="/assets/star-filled.svg" />
+  <img src="/assets/star-filled.svg" />
+  <img src="/assets/star-empty.svg" />
+  <progress id="file" max="100" value="0"> 0% </progress>
+</div>     
+
+<div>
+  <img src="/assets/star-filled.svg" />
+  <img src="/assets/star-filled.svg" />
+  <img src="/assets/star-filled.svg" />
+  <img src="/assets/star-empty.svg" />
+  <img src="/assets/star-empty.svg" />
+  <progress id="file" max="100" value="0"> 0% </progress>
+</div>
+
+<div>
+  <img src="/assets/star-filled.svg" />
+  <img src="/assets/star-filled.svg" />
+  <img src="/assets/star-empty.svg" />
+  <img src="/assets/star-empty.svg" />
+  <img src="/assets/star-empty.svg" />
+  <progress id="file" max="100" value="0"> 0% </progress>
+</div>
+
+<div>
+  <img src="/assets/star-filled.svg" />
+  <img src="/assets/star-empty.svg" />
+  <img src="/assets/star-empty.svg" />
+  <img src="/assets/star-empty.svg" />
+  <img src="/assets/star-empty.svg" />
+  <progress id="file" max="100" value="0"> 0% </progress>
+</div>
+  <% include partials/footer %>
+    
+  </body>
+</html>
