@@ -82,6 +82,10 @@ app.get("/courses/:id", (req, res) => {
 		}
 	});
 });
+
+app.post("/search", (req, res) => {
+	res.redirect("/courses");
+});
 		
 // Create - Route to handle info from form and add a new course to DB
 app.post("/courses", (req, res) => {
@@ -104,7 +108,7 @@ app.post("/courses", (req, res) => {
 			console.log(err);
 		} else {
 			console.log(newlyCreated);
-			res.redirect("/courses");
+			res.redirect("/courses/" + newlyCreated._id);
 		}
 		
 	})
