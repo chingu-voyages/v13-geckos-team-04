@@ -84,7 +84,7 @@ app.post("/search", (req, res) => {
 		if (err) {
 			console.log(err)
 		} else {
-			res.render("landing",{reviews: reviews});
+			res.render("landing",{reviews: reviews, searchFor: req.body.searchText});
 		}
 	} );
 });
