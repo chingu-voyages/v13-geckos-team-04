@@ -1,25 +1,21 @@
-<% include partials/header %>
+    <% include partials/header %>
 
     <p>
         Hello World, This is Code Reviews landing page! Go team! We are Sivan, Dario, and Noah!
     </p>
 
     <% if (typeof (searchFor) != "undefined" && searchFor != "") { %>
-    <h1>Search Results For: <%= searchFor %> </h1>
+        <h1 class="h1">Search Results For: <%= searchFor %> </h1>
+
+        <% if (reviews.length == 0) {%>
+            <div class="noResults">
+                <img src="assets/noResults.gif" />
+            </div>
+        <% } %>
+
     <% } %>
-    <!--
-		<div>
-			<h4><%= reviews.title %></h4>
-			<h5>Course Description: <%= reviews.description %></h5>
-			<h5>Author: <%= reviews.author %></h5>
-			<h5><a href="<%= reviews.authorUrl %>">Author Site</a></h5>
-			<image src="<%= reviews.imageUrl %>"></image>
-			<h5>Review Title: <%= reviews.reviewTitle %></h5>
-			<p>Review Details: <%= reviews.reviewDetails %></p>
-			<h5>Price: <%= reviews.price %></h5>
-			<h5><a href="<%= reviews.courseUrl %>">Link to Course!</a></h5>
-		</div>
-		-->
+
+
     <main class="mainAllCourses">
         <% reviews.forEach((reviews) => { %>
             <div class="coursecard">
@@ -43,17 +39,15 @@
                             <img src="./assets/star-filled.svg" />
                             <img src="./assets/star-empty.svg" />
                         </div>
-                        <div class="coursecard__votecount">(37 votes)</div>
+                        <div class="coursecard__votecount">
+                            (37 votes)
+                        </div>
                     </div>
                 </div>
             </div>
-
-            </div>
-
-            <% }); %>
+        <% }); %>
     </main>
     <% include partials/footer %>
 
 </body>
-
 </html>
