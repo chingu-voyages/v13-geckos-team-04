@@ -3,7 +3,21 @@ const express    = require("express"),
 	  bodyParser = require("body-parser"),
 	  mongoose   = require("mongoose");
 	
-mongoose.connect("mongodb://localhost:27017/code_review", {useNewUrlParser: true, useUnifiedTopology: true});
+// connect to local DB
+// mongoose.connect("mongodb://localhost:27017/code_review", {useNewUrlParser: true, useUnifiedTopology: true});
+
+// connect to cloud DB
+mongoose.connect("mongodb+srv://nlcopping:MONGO_PASSWORD@cluster0-70ykt.mongodb.net/test?retryWrites=true&w=majority", {
+	useNewUrlParser: true, 
+	useUnifiedTopology: true,
+	useCreateIndex: true
+}).then(() => {
+	console.log("Connected to DB");
+}).catch(err => {
+	Console.log("ERROR", err.message);
+});
+
+
 app.use(bodyParser.urlencoded({extended:true})); 
 app.set("view engine", "ejs");	
 
