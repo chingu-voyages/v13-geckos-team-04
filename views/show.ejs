@@ -1,7 +1,7 @@
 <% include partials/header %>
 
     <h1 class="h1"><%= course.title %></h1>
-    <div class="coursecard__starrating">
+    <div class="course__starrating">
       <img src="/assets/star-filled.svg" />
       <img src="/assets/star-filled.svg" />
       <img src="/assets/star-filled.svg" />
@@ -15,7 +15,14 @@
       <%= course.description %>
     </div>
 
-<div>$<%= course.price %></div>
+<div>
+<% if (course.price === 0) { %>
+  Free!
+<% } else { %>
+  $<%= course.price %>
+<% } %>
+
+</div>
 <div>Check it out <b>here</b>: <a href="<%= course.courseUrl %>" target="_blank"><%= course.courseUrl %></a></div>
 
 <img src="<%= course.imageUrl %>" /> 

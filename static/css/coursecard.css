@@ -9,6 +9,8 @@
   background-color: var(--secondary-color);
   min-height: 230px;
   width: 380px;
+  margin-block-end: 0.3rem;
+
 }
 
 .coursecard__contents {
@@ -70,3 +72,13 @@
   font-weight: 500;
 }
 
+.mainAllCourses {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.noResults {
+  display: flex;
+  justify-content: center;
+}
