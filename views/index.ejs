@@ -1,10 +1,21 @@
 <% include partials/header %>
+<<<<<<< HEAD:views/landing.ejs
 
     <p>
         Hello World, This is Code Reviews landing page! Go team! We are Sivan, Dario, and Noah!
     </p>
     <!--
 		<div>
+=======
+    
+   <p>
+	   Hello World, This is Code Reviews landing page! Go team! We are Sivan, Dario, and Noah!
+		</p>
+		
+		<% reviews.forEach((reviews) => { %>
+		
+		<div style="flex">
+>>>>>>> changed landing.ejs to index.ejs to follow rest and updated target render page. Added more info link on index page:views/index.ejs
 			<h4><%= reviews.title %></h4>
 			<h5>Course Description: <%= reviews.description %></h5>
 			<h5>Author: <%= reviews.author %></h5>
@@ -14,6 +25,11 @@
 			<p>Review Details: <%= reviews.reviewDetails %></p>
 			<h5>Price: <%= reviews.price %></h5>
 			<h5><a href="<%= reviews.courseUrl %>">Link to Course!</a></h5>
+<<<<<<< HEAD:views/landing.ejs
+=======
+			<a href="/courses/<%= reviews._id %>">More Info!</a>
+			
+>>>>>>> changed landing.ejs to index.ejs to follow rest and updated target render page. Added more info link on index page:views/index.ejs
 		</div>
 		-->
     <main class="mainAllCourses">

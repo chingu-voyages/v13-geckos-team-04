@@ -54,7 +54,7 @@ app.get("/courses", (req, res) => {
 		if (err) {
 			console.log(err)
 		} else {
-			res.render("landing",{reviews:allReviews});
+			res.render("index",{reviews:allReviews});
 		}
 	});
 });		
@@ -69,6 +69,7 @@ app.get("/courses/new", (req, res) => {
 		res.render("newreview", {tags: tags});
 });
 	
+// 	Show - Show specific course with additional details by using ID to grab it from the data base
 app.get("/courses/:id", (req, res) => {
 	var id = req.params.id;
 	Review.findById(id, (err, course) => {
@@ -83,6 +84,18 @@ app.get("/courses/:id", (req, res) => {
 	});
 });
 		
+
+
+	
+	// const reviews = [
+	// 	{title: "Noah's Normal Node Nook", author:"Noah", review:"Course about Node", image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"},
+	// 	{title: "Shivan's Super Scala Story", author:"Shivan", review:"Scala information", image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1352&q=80"},
+	// 	{title: "Dario's Deep Database Dive", author:"Dario", review:"Databases in Depth", image: "https://images.unsplash.com/photo-1504639725590-34d0984388bd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80"}
+	// 	]
+	// 
+});		
+
+>>>>>>> changed landing.ejs to index.ejs to follow rest and updated target render page. Added more info link on index page
 // Create - Route to handle info from form and add a new course to DB
 app.post("/courses", (req, res) => {
 // 	Get fields from form and save in newReview variable
