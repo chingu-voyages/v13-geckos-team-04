@@ -71,6 +71,7 @@ app.get("/courses/new", (req, res) => {
 	
 // 	Show - Show specific course with additional details by using ID to grab it from the data base
 <<<<<<< HEAD
+<<<<<<< HEAD
 app.get("/courses/:id", (req, res) => {
 	var id = req.params.id;
 	Review.findById(id, (err, course) => {
@@ -92,6 +93,11 @@ app.get("/courses/:id", (req, res) => {
 	res.render("show");
 });
 >>>>>>> added index.css file
+=======
+	app.get("/courses/:id", (req, res) => {
+	res.render("show");
+});
+>>>>>>> 6cefdb107a89ada2e017fbbb34e4b119ccd4bb29
 	
 	// const reviews = [
 	// 	{title: "Noah's Normal Node Nook", author:"Noah", review:"Course about Node", image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"},
