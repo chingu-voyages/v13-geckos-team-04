@@ -26,10 +26,6 @@ const reviewSchema = new mongoose.Schema({
 	reviewDetails: String
 });
 
-		
-
-
-
 const Review = mongoose.model("Review", reviewSchema);
 
 // Code to Manually add a Review to Database
@@ -82,6 +78,16 @@ app.get("/courses/:id", (req, res) => {
 		}
 	});
 });
+
+app.post("/search", (req, res) => {
+	Review.find( {'title': {'$regex': req.body.searchText, '$options' : 'i'} }, (err, reviews) => {
+		if (err) {
+			console.log(err)
+		} else {
+			res.render("landing",{reviews: reviews, searchFor: req.body.searchText});
+		}
+	} );
+});
 		
 // Create - Route to handle info from form and add a new course to DB
 app.post("/courses", (req, res) => {
@@ -104,7 +110,7 @@ app.post("/courses", (req, res) => {
 			console.log(err);
 		} else {
 			console.log(newlyCreated);
-			res.redirect("/courses");
+			res.redirect("/courses/" + newlyCreated._id);
 		}
 		
 	})

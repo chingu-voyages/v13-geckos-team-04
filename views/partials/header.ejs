@@ -14,10 +14,10 @@
 
 <body>
   <header class="header">
-    <a href="/" class="header__link">Code Review &lt/&gt</a>
+    <a href="/courses" class="header__link">Code Review &lt/&gt</a>
     <nav class="header__nav">
-      <form action="" name="searchForm" class="searchForm">
-        <input type="text" class="searchForm__text" placeholder="Enter Search Term..." />
+      <form action="/search" method="POST" name="searchForm" class="searchForm">
+        <input type="text" class="searchForm__text" name="searchText" placeholder="Enter Search Term..." />
         <input type="submit" class="searchForm__submit" value="Search" />
       </form>
       <a href="" class="profileBtn" alt="User Profile" title="User Profile">
