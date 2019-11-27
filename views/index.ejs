@@ -4,43 +4,36 @@
 	   Hello World, This is Code Reviews landing page! Go team! We are Sivan, Dario, and Noah!
 		</p>
 		
-<div class="centered">
-		<% reviews.forEach((reviews) => { %>
- 
-            <section class="cards">
-                 
-                <article class="card">
-                   <h4><%= reviews.title %></h4>
-					<image src="<%= reviews.imageUrl %>"></image>
-					<a href="/courses/<%= reviews._id %>">More Info!</a>
-                </article><!-- /card-one -->
- 
-    
- 
-   			 </section>
-
-		
-		<!-- <div>
-			<h4><%= reviews.title %></h4>
-			<h5>Course Description: <%= reviews.description %></h5>
-			<h5>Author: <%= reviews.author %></h5>
-			<h5><a href="<%= reviews.authorUrl %>">Author Site</a></h5>
-			<image src="<%= reviews.imageUrl %>"></image>
-			<h5>Review Title: <%= reviews.reviewTitle %></h5>
-			<p>Review Details: <%= reviews.reviewDetails %></p>
-			<h5>Price: <%= reviews.price %></h5>
-			<h5><a href="<%= reviews.courseUrl %>">Link to Course!</a></h5>
-			<a href="/courses/<%= reviews._id %>">More Info!</a>
-			
-		</div> -->
+<main class="mainAllCourses">
+        <% reviews.forEach((reviews) => { %>
+            <div class="coursecard">
+                <div class="coursecard__contents">
+                    <div class="coursecard__title">
+                        <a href="/courses/<%= reviews.id%>" class="coursecard__link"><%= reviews.title %></a>
+                    </div>
+                    <div class="coursecard__tags">
+                        <div class="coursecard__tag">CSS</div>
+                        <div class="coursecard__tag">SASS</div>
+                        <div class="coursecard__tag">Styling</div>
+                    </div>
+                    <div class="coursecard__footer">
+                        <div class="coursecard__price">
+                            $<%= reviews.price %>
+                        </div>
+                        <div class="coursecard__starrating">
+                            <img src="./assets/star-filled.svg" />
+                            <img src="./assets/star-filled.svg" />
+                            <img src="./assets/star-filled.svg" />
+                            <img src="./assets/star-filled.svg" />
+                            <img src="./assets/star-empty.svg" />
+                        </div>
+                        <div class="coursecard__votecount">(37 votes)</div>
+                    </div>
+                </div>
+            </div>
 					
 		<% }); %>
 	
-		</div>
-		<div>
-			<a href="/signup">To Sign Up Page</a>
-			<a href="/login">To Login Page</a>
-			<a href="/about">To About Page</a>
-			<a href="/courses/new">To Create a New Review Page</a>
-		</div>
+</main>
+		
 		<% include partials/footer %>
