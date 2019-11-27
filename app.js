@@ -27,7 +27,7 @@ var path = require('path');
 app.use(express.static(path.join(__dirname, 'static')));			  
 
 // 		  Mongo Schema for new reviews, eventually break off into seperate folder to req
-const reviewSchema = new mongoose.Schema({
+const courseSchema = new mongoose.Schema({
 	title: String,
 	description: String,
 	imageUrl: String,
@@ -41,7 +41,7 @@ const reviewSchema = new mongoose.Schema({
 	reviewDetails: String
 });
 
-const Review = mongoose.model("Review", reviewSchema);
+const Course = mongoose.model("Course", courseSchema);
 
 
 app.get("/", (req, res) => {
@@ -51,11 +51,11 @@ app.get("/", (req, res) => {
 // Index - Show all courses
 app.get("/courses", (req, res) => {
 // 	Get all reviews from DB 
-	Review.find({}, (err, allReviews) => {
+	Course.find({}, (err, allCourses) => {
 		if (err) {
 			console.log(err);
 		} else {
-			res.render("index",{reviews:allReviews});
+			res.render("index",{courses:allCourses});
 		}
 	});
 });		
@@ -74,24 +74,24 @@ app.get("/courses/new", (req, res) => {
 
 app.get("/courses/:id", (req, res) => {
 	var id = req.params.id;
-	Review.findById(id, (err, course) => {
+	Course.findById(id, (err, foundCourse) => {
 		if (err) {
 			console.log(err);
-		} else if (course == null) {
+		} else if (foundCourse == null) {
 			console.log('No course found with id ' + id);
 			return res.redirect("/error");
 		} else {
-			res.render("show", {course: course});
+			res.render("show", {foundCourse: foundCourse});
 		}
 	});
 });
 
 app.post("/search", (req, res) => {
-	Review.find( {'title': {'$regex': req.body.searchText, '$options' : 'i'} }, (err, reviews) => {
+	Course.find( {'title': {'$regex': req.body.searchText, '$options' : 'i'} }, (err, courses) => {
 		if (err) {
 			console.log(err)
 		} else {
-			res.render("landing",{reviews: reviews, searchFor: req.body.searchText});
+			res.render("index",{courses: courses, searchFor: req.body.searchText});
 		}
 	} );
 });
@@ -111,9 +111,9 @@ app.post("/courses", (req, res) => {
 	const courseUrl = req.body.courseUrl;	
 	const imageUrl = req.body.imageUrl;
 // 	Save as new var object
-	const newReview = {title: title, author: author, authorUrl: authorUrl, reviewTitle: reviewTitle, reviewDetails: reviewDetails, price: price, isFree: isFree, courseUrl: courseUrl, imageUrl: imageUrl, description: description };
+	const newCourse = {title: title, author: author, authorUrl: authorUrl, reviewTitle: reviewTitle, reviewDetails: reviewDetails, price: price, isFree: isFree, courseUrl: courseUrl, imageUrl: imageUrl, description: description };
 // 	Add to data base
-	Review.create(newReview, (err, newlyCreated) => {
+	Course.create(newCourse, (err, newlyCreated) => {
 		if(err) {
 			console.log(err);
 		} else {

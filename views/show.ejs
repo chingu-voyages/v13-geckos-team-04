@@ -1,6 +1,6 @@
 <% include partials/header %>
 
-    <h1 class="h1"><%= course.title %></h1>
+    <h1 class="h1"><%= foundCourse.title %></h1>
     <div class="course__starrating">
       <img src="/assets/star-filled.svg" />
       <img src="/assets/star-filled.svg" />
@@ -9,23 +9,23 @@
       <img src="/assets/star-empty.svg" />
     </div>
 
-<h3>By: <%= course.author %></h3>
+<h3>By: <%= foundCourse.author %></h3>
 
     <div>
-      <%= course.description %>
+      <%= foundCourse.description %>
     </div>
 
 <div>
-<% if (course.price === 0) { %>
+<% if (foundCourse.price === 0) { %>
   Free!
 <% } else { %>
-  $<%= course.price %>
+  $<%= foundCourse.price %>
 <% } %>
 
 </div>
-<div>Check it out <b>here</b>: <a href="<%= course.courseUrl %>" target="_blank"><%= course.courseUrl %></a></div>
+<div>Check it out <b>here</b>: <a href="<%= foundCourse.courseUrl %>" target="_blank"><%= foundCourse.courseUrl %></a></div>
 
-<img src="<%= course.imageUrl %>" /> 
+<img src="<%= foundCourse.imageUrl %>" /> 
 <hr class="hr"/> 
 
 <h2>User Reviews</h2>

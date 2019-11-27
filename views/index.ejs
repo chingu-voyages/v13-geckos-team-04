@@ -5,12 +5,13 @@
 		</p>
 		
 <main class="mainAllCourses">
-        <% reviews.forEach((reviews) => { %>
+        <% courses.forEach((courses) => { %>
             <div class="coursecard">
                 <div class="coursecard__contents">
                     <div class="coursecard__title">
-                        <a href="/courses/<%= reviews.id%>" class="coursecard__link"><%= reviews.title %></a>
-                    </div>
+                        <a href="/courses/<%= courses.id%>" class="coursecard__link"><%= courses.title %></a>
+					</div>
+					<img src="<%= courses.imageUrl %>">
                     <div class="coursecard__tags">
                         <div class="coursecard__tag">CSS</div>
                         <div class="coursecard__tag">SASS</div>
@@ -18,7 +19,7 @@
                     </div>
                     <div class="coursecard__footer">
                         <div class="coursecard__price">
-                            $<%= reviews.price %>
+                            $<%= courses.price %>
                         </div>
                         <div class="coursecard__starrating">
                             <img src="./assets/star-filled.svg" />
