@@ -8,7 +8,7 @@ const express    = require("express"),
 // connect to Cloud DB
 // const url = process.env.DATABASE || "mongodb://localhost:27017/code_review"
 
-mongoose.connect("mongodb+srv://nlcopping:" + process.env.MONGO_PASSWORD + "@cluster0-70ykt.mongodb.net/test?retryWrites=true&w=majority", {
+mongoose.connect("mongodb+srv://nlcopping:" + process.env.MONGO_PASSWORD + "@cluster0-70ykt.mongodb.net/code_review?retryWrites=true&w=majority", {
 	useNewUrlParser: true, 
 	useUnifiedTopology: true,
 	useCreateIndex: true
