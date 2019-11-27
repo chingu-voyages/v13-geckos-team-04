@@ -3,18 +3,18 @@ const express    = require("express"),
 	  bodyParser = require("body-parser"),
 	  mongoose   = require("mongoose");
 	
-// connect to local DB
+// connect to local DB - Do not remove
 // mongoose.connect("mongodb://localhost:27017/code_review", {useNewUrlParser: true, useUnifiedTopology: true});
 
-// connect to cloud DB
-mongoose.connect("mongodb+srv://nlcopping:MONGO_PASSWORD@cluster0-70ykt.mongodb.net/test?retryWrites=true&w=majority", {
+// connect to Cloud DB
+mongoose.connect(process.env.DATABASE, {
 	useNewUrlParser: true, 
 	useUnifiedTopology: true,
 	useCreateIndex: true
 }).then(() => {
 	console.log("Connected to DB");
 }).catch(err => {
-	Console.log("ERROR", err.message);
+	console.log("ERROR", err.message);
 });
 
 
