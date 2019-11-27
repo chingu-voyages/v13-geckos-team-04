@@ -5,9 +5,10 @@ const express    = require("express"),
 	
 // connect to local DB - Do not remove
 // mongoose.connect("mongodb://localhost:27017/code_review", {useNewUrlParser: true, useUnifiedTopology: true});
-
 // connect to Cloud DB
-mongoose.connect(process.env.DATABASE, {
+// const url = process.env.DATABASE || "mongodb://localhost:27017/code_review"
+
+mongoose.connect("mongodb+srv://nlcopping:" + process.env.MONGO_PASSWORD + "@cluster0-70ykt.mongodb.net/test?retryWrites=true&w=majority", {
 	useNewUrlParser: true, 
 	useUnifiedTopology: true,
 	useCreateIndex: true
@@ -66,7 +67,7 @@ app.get("/courses/new", (req, res) => {
 					{id: 3, title: "NodeJS"}, 
 					{id: 4, title: "Express"}, 
 					{id: 5, title: "MongoDB"}];
-		res.render("newreview", {tags: tags});
+		res.render("newcourse", {tags: tags});
 });
 	
 // 	Show - Show specific course with additional details by using ID to grab it from the data base
