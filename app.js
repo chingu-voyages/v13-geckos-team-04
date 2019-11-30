@@ -15,18 +15,18 @@ mongoose.set('useFindAndModify', false);
 const {MONGO_USERNAME, MONGO_PASSWORD} = process.env;
 mongoose
   .connect(
-    `mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@cluster0-70ykt.mongodb.net/code_review?retryWrites=true&w=majority`,
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useCreateIndex: true,
-    }
+	`mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@cluster0-70ykt.mongodb.net/code_review?retryWrites=true&w=majority`,
+	{
+	  useNewUrlParser: true,
+	  useUnifiedTopology: true,
+	  useCreateIndex: true,
+	}
   )
   .then(() => {
-    console.log('Connected to DB');
+	console.log('Connected to DB');
   })
   .catch(err => {
-    console.log('ERROR', err.message);
+	console.log('ERROR', err.message);
   });
 
 app.use(bodyParser.urlencoded({extended: true}));
@@ -63,11 +63,11 @@ app.get('/', (req, res) => {
 app.get('/courses', (req, res) => {
   // 	Get all reviews from DB
   Course.find({}, (err, allCourses) => {
-    if (err) {
-      console.log(err);
-    } else {
-      res.render('index', {courses: allCourses});
-    }
+	if (err) {
+	  console.log(err);
+	} else {
+	  res.render('index', {courses: allCourses});
+	}
   });
 });
 
@@ -77,50 +77,50 @@ app.post('/courses', (req, res) => {
 
   // 	Get fields from form and save in newReview variable
   const {
-    title,
-    author,
-    description,
-    authorUrl,
-    reviewTitle,
-    reviewDetails,
-    price,
-    isFree,
-    courseUrl,
-    imageUrl,
+	title,
+	author,
+	description,
+	authorUrl,
+	reviewTitle,
+	reviewDetails,
+	price,
+	isFree,
+	courseUrl,
+	imageUrl,
   } = req.body;
 
   // 	Save as new var object
   const newCourse = {
-    title,
-    author,
-    authorUrl,
-    reviewTitle,
-    reviewDetails,
-    price,
-    isFree,
-    courseUrl,
-    imageUrl,
-    description,
+	title,
+	author,
+	authorUrl,
+	reviewTitle,
+	reviewDetails,
+	price,
+	isFree,
+	courseUrl,
+	imageUrl,
+	description,
   };
   // 	Add to data base
   Course.create(newCourse, (err, newlyCreated) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(newlyCreated);
-      res.redirect('/courses/' + newlyCreated._id);
-    }
+	if (err) {
+	  console.log(err);
+	} else {
+	  console.log(newlyCreated);
+	  res.redirect('/courses/' + newlyCreated._id);
+	}
   });
 });
 
 // New - Route to show form for new courses
 app.get('/courses/new', (req, res) => {
   const tags = [
-    {id: 1, title: 'CSS'},
-    {id: 2, title: 'JS'},
-    {id: 3, title: 'NodeJS'},
-    {id: 4, title: 'Express'},
-    {id: 5, title: 'MongoDB'},
+	{id: 1, title: 'CSS'},
+	{id: 2, title: 'JS'},
+	{id: 3, title: 'NodeJS'},
+	{id: 4, title: 'Express'},
+	{id: 5, title: 'MongoDB'},
   ];
   res.render('newcourse', {tags: tags});
 });
@@ -130,53 +130,53 @@ app.get('/courses/new', (req, res) => {
 app.get('/courses/:id', (req, res) => {
   var id = req.params.id;
   Course.findById(id, (err, foundCourse) => {
-    if (err) {
-      console.log(err);
-    } else if (foundCourse == null) {
-      console.log('No course found with id ' + id);
-      return res.redirect('/error');
-    } else {
-      res.render('show', {foundCourse: foundCourse});
-    }
+	if (err) {
+	  console.log(err);
+	} else if (foundCourse == null) {
+	  console.log('No course found with id ' + id);
+	  return res.redirect('/error');
+	} else {
+	  res.render('show', {foundCourse: foundCourse});
+	}
   });
 });
 
 // Edit Route - Show form to edit a course.
 app.get('/courses/:id/edit', (req, res) => {
   Course.findById(req.params.id, (err, foundCourse) => {
-    if (err) {
-      res.render('error');
-    } else {
-      res.render('edit', {course: foundCourse});
-    }
+	if (err) {
+	  res.render('error');
+	} else {
+	  res.render('edit', {course: foundCourse});
+	}
   });
 });
 
 // Update Route - Take info from edit form and update DB data
 app.put('/courses/:id', (req, res) => {
   Course.findByIdAndUpdate(
-    req.params.id,
-    req.body.course,
-    (err, updatedCourse) => {
-      if (err) {
-        res.render('error');
-      } else {
-        res.redirect('/courses/' + req.params.id);
-      }
-    }
+	req.params.id,
+	req.body.course,
+	(err, updatedCourse) => {
+	  if (err) {
+		res.render('error');
+	  } else {
+		res.redirect('/courses/' + req.params.id);
+	  }
+	}
   );
 });
 
 app.post('/search', (req, res) => {
   Course.find(
-    {title: {$regex: req.body.searchText, $options: 'i'}},
-    (err, courses) => {
-      if (err) {
-        console.log(err);
-      } else {
-        res.render('index', {courses: courses, searchFor: req.body.searchText});
-      }
-    }
+	{title: {$regex: req.body.searchText, $options: 'i'}},
+	(err, courses) => {
+	  if (err) {
+		console.log(err);
+	  } else {
+		res.render('index', {courses: courses, searchFor: req.body.searchText});
+	  }
+	}
   );
 });
 
