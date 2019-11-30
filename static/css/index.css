@@ -11,6 +11,7 @@
   }
   
   .coursecard {
+    position: relative;
     border: 3px solid var(--primary-color);
     background-color: var(--secondary-color);
     height: 230px;
@@ -18,6 +19,20 @@
     background-size: cover;
     margin: .5rem;
     overflow: hidden;
+    z-index: 1;
+}
+
+.coursecard::after {
+    position: absolute;
+    content: "";
+    background-size: cover;
+    top: 0; 
+    left: 0;
+    width: 100%; 
+    height: 100%;  
+    opacity: .3; 
+    z-index: -1;
+    background-image: var(--bgimg);
   }
   
   .coursecard__contents {
