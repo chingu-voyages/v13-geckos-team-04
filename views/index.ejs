@@ -12,24 +12,26 @@
                     <div class="coursecard__title">
                         <a href="/courses/<%= course.id%>" class="coursecard__link"><%= course.title %></a>
 					</div>
-		
-                    <div class="coursecard__tags">
-                        <div class="coursecard__tag">CSS</div>
-                        <div class="coursecard__tag">SASS</div>
-                        <div class="coursecard__tag">Styling</div>
-                    </div>
-                    <div class="coursecard__footer">
-                        <div class="coursecard__price">
-                            $<%= course.price %>
+                    <div class="coursecard__tags-and-footer">
+                        <div class="coursecard__tags">
+                            <div class="coursecard__tag">CSS</div>
+                            <div class="coursecard__tag">SASS</div>
+                            <div class="coursecard__tag">Styling</div>
                         </div>
-                        <div class="coursecard__starrating">
-                            <img src="./assets/star-filled.svg" />
-                            <img src="./assets/star-filled.svg" />
-                            <img src="./assets/star-filled.svg" />
-                            <img src="./assets/star-filled.svg" />
-                            <img src="./assets/star-empty.svg" />
+                        <div class="coursecard__footer">
+                            <div class="coursecard__price">
+                                $<%= course.price %>
+                            </div>
+                            <div class="coursecard__starrating">
+                                <img src="./assets/star-filled.svg" />
+                                <img src="./assets/star-filled.svg" />
+                                <img src="./assets/star-filled.svg" />
+                                <img src="./assets/star-filled.svg" />
+                                <img src="./assets/star-empty.svg" />
+                            </div>
+                            <div class="coursecard__votecount">(37 votes)</div>
                         </div>
-                        <div class="coursecard__votecount">(37 votes)</div>
+
                     </div>
                 </div>
             </div>
