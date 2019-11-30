@@ -1,7 +1,9 @@
 const express    = require("express"),
 	  app        = express(),
 	  bodyParser = require("body-parser"),
-	  mongoose   = require("mongoose");
+	  mongoose   = require("mongoose"); 
+
+require('dotenv/config');
 	
 // connect to local DB - Do not remove
 // mongoose.connect("mongodb://localhost:27017/code_review", {useNewUrlParser: true, useUnifiedTopology: true});
