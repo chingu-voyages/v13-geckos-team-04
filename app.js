@@ -1,6 +1,7 @@
 const express    = require("express"),
 	  app        = express(),
 	  bodyParser = require("body-parser"),
+	  methodOverride = require("method-override"),
 	  mongoose   = require("mongoose"); 
 
 require('dotenv/config');
@@ -26,7 +27,9 @@ app.set("view engine", "ejs");
 
 // Serve static files
 var path = require('path');
-app.use(express.static(path.join(__dirname, 'static')));			  
+app.use(express.static(path.join(__dirname, 'static')));
+// Allow PUT & DELETE methods by overriding POST method
+app.use(methodOverride("_method"));
 
 // 		  Mongo Schema for new reviews, eventually break off into seperate folder to req
 const courseSchema = new mongoose.Schema({
@@ -61,43 +64,6 @@ app.get("/courses", (req, res) => {
 		}
 	});
 });		
-	
-	// New - Route to show form for new courses
-app.get("/courses/new", (req, res) => {
-		const tags = [{id: 1, title: "CSS"}, 
-					{id: 2, title: "JS"}, 
-					{id: 3, title: "NodeJS"}, 
-					{id: 4, title: "Express"}, 
-					{id: 5, title: "MongoDB"}];
-		res.render("newcourse", {tags: tags});
-});
-	
-// 	Show - Show specific course with additional details by using ID to grab it from the data base
-
-app.get("/courses/:id", (req, res) => {
-	var id = req.params.id;
-	Course.findById(id, (err, foundCourse) => {
-		if (err) {
-			console.log(err);
-		} else if (foundCourse == null) {
-			console.log('No course found with id ' + id);
-			return res.redirect("/error");
-		} else {
-			res.render("show", {foundCourse: foundCourse});
-		}
-	});
-});
-
-app.post("/search", (req, res) => {
-	Course.find( {'title': {'$regex': req.body.searchText, '$options' : 'i'} }, (err, courses) => {
-		if (err) {
-			console.log(err)
-		} else {
-			res.render("index",{courses: courses, searchFor: req.body.searchText});
-		}
-	} );
-});
-		
 
 // Create - Route to handle info from form and add a new course to DB
 app.post("/courses", (req, res) => {
@@ -125,6 +91,72 @@ app.post("/courses", (req, res) => {
 		
 	})
 });
+	
+	// New - Route to show form for new courses
+app.get("/courses/new", (req, res) => {
+		const tags = [{id: 1, title: "CSS"}, 
+					{id: 2, title: "JS"}, 
+					{id: 3, title: "NodeJS"}, 
+					{id: 4, title: "Express"}, 
+					{id: 5, title: "MongoDB"}];
+		res.render("newcourse", {tags: tags});
+});
+	
+// 	Show - Show specific course with additional details by using ID to grab it from the data base
+
+app.get("/courses/:id", (req, res) => {
+	var id = req.params.id;
+	Course.findById(id, (err, foundCourse) => {
+		if (err) {
+			console.log(err);
+		} else if (foundCourse == null) {
+			console.log('No course found with id ' + id);
+			return res.redirect("/error");
+		} else {
+			res.render("show", {foundCourse: foundCourse});
+		}
+	});
+});
+
+// Edit Route - Show form to edit a course. 
+app.get("/courses/:id/edit", (req, res) => {
+	Course.findById(req.params.id, (err, foundCourse) => {
+		console.log(foundCourse._id)
+		if(err) {
+			res.render("error");
+		} else {
+			res.render("edit", {course: foundCourse});
+		}
+	});
+});
+
+// Update Route - Take info from edit form and update DB data
+app.put("courses/:id", (req, res) => {
+
+	res.send("update route")
+	// Course.findByIdAndUpdate(req.params.id, req.body.course, (err, updatedCourse) => {
+	// 	if(err) {
+	// 		console.log(err)
+	// 		res.render("error");
+	// 	} else {
+	// 		res.redirect("courses/" + req.params.id);
+	// 	}
+	// });
+});
+
+
+app.post("/search", (req, res) => {
+	Course.find( {'title': {'$regex': req.body.searchText, '$options' : 'i'} }, (err, courses) => {
+		if (err) {
+			console.log(err)
+		} else {
+			res.render("index",{courses: courses, searchFor: req.body.searchText});
+		}
+	} );
+});
+		
+
+
 
 
 // Route for sign up page			  
