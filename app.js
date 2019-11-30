@@ -6,11 +6,13 @@ const express    = require("express"),
 
 require('dotenv/config');
 	
+
 // connect to local DB - Do not remove
 // mongoose.connect("mongodb://localhost:27017/code_review", {useNewUrlParser: true, useUnifiedTopology: true});
 // connect to Cloud DB
 // const url = process.env.DATABASE || "mongodb://localhost:27017/code_review"
 
+mongoose.set('useFindAndModify', false);
 mongoose.connect("mongodb+srv://nlcopping:" + process.env.MONGO_PASSWORD + "@cluster0-70ykt.mongodb.net/code_review?retryWrites=true&w=majority", {
 	useNewUrlParser: true, 
 	useUnifiedTopology: true,
@@ -24,6 +26,7 @@ mongoose.connect("mongodb+srv://nlcopping:" + process.env.MONGO_PASSWORD + "@clu
 
 app.use(bodyParser.urlencoded({extended:true})); 
 app.set("view engine", "ejs");	
+
 
 // Serve static files
 var path = require('path');
@@ -121,7 +124,6 @@ app.get("/courses/:id", (req, res) => {
 // Edit Route - Show form to edit a course. 
 app.get("/courses/:id/edit", (req, res) => {
 	Course.findById(req.params.id, (err, foundCourse) => {
-		console.log(foundCourse._id)
 		if(err) {
 			res.render("error");
 		} else {
@@ -131,17 +133,14 @@ app.get("/courses/:id/edit", (req, res) => {
 });
 
 // Update Route - Take info from edit form and update DB data
-app.put("courses/:id", (req, res) => {
-
-	res.send("update route")
-	// Course.findByIdAndUpdate(req.params.id, req.body.course, (err, updatedCourse) => {
-	// 	if(err) {
-	// 		console.log(err)
-	// 		res.render("error");
-	// 	} else {
-	// 		res.redirect("courses/" + req.params.id);
-	// 	}
-	// });
+app.put("/courses/:id", (req, res) => {
+	Course.findByIdAndUpdate(req.params.id, req.body.course, (err, updatedCourse) => {
+		if(err) {
+			res.render("error");
+		} else {
+			res.redirect("/courses/" + req.params.id);
+		}
+	});
 });
 
 
