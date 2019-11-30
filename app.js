@@ -13,7 +13,8 @@ require('dotenv/config');
 // const url = process.env.DATABASE || "mongodb://localhost:27017/code_review"
 
 mongoose.set('useFindAndModify', false);
-mongoose.connect("mongodb+srv://nlcopping:" + process.env.MONGO_PASSWORD + "@cluster0-70ykt.mongodb.net/code_review?retryWrites=true&w=majority", {
+const {MONGO_USERNAME, MONGO_PASSWORD} = process.env;
+mongoose.connect(`mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@cluster0-70ykt.mongodb.net/code_review?retryWrites=true&w=majority`, {
 	useNewUrlParser: true, 
 	useUnifiedTopology: true,
 	useCreateIndex: true
@@ -71,18 +72,10 @@ app.get("/courses", (req, res) => {
 // Create - Route to handle info from form and add a new course to DB
 app.post("/courses", (req, res) => {
 // 	Get fields from form and save in newReview variable
-	const title = req.body.title;
-	const author = req.body.author;
-	const description = req.body.description;
-	const authorUrl = req.body.authorUrl;
-	const reviewTitle = req.body.reviewTitle;
-	const reviewDetails = req.body.reviewDetails;
-	const price = req.body.price;
-	const isFree = req.body.isFree;
-	const courseUrl = req.body.courseUrl;	
-	const imageUrl = req.body.imageUrl;
+	const {title, author, description, authorUrl, reviewTitle, reviewDetails, price, isFree, courseUrl, imageUrl} = req.body;
+
 // 	Save as new var object
-	const newCourse = {title: title, author: author, authorUrl: authorUrl, reviewTitle: reviewTitle, reviewDetails: reviewDetails, price: price, isFree: isFree, courseUrl: courseUrl, imageUrl: imageUrl, description: description };
+	const newCourse = {title, author, authorUrl, reviewTitle, reviewDetails, price, isFree, courseUrl, imageUrl, description };
 // 	Add to data base
 	Course.create(newCourse, (err, newlyCreated) => {
 		if(err) {
