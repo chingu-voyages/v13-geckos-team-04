@@ -1,17 +1,18 @@
 <% include partials/header %>
     
-   <p>
+    <p>
 	   Hello World, This is Code Reviews landing page! Go team! We are Sivan, Dario, and Noah!
-		</p>
+	</p>
 		
 <main class="mainAllCourses">
-        <% courses.forEach((courses) => { %>
-            <div class="coursecard">
+        <% courses.forEach(course => { %>
+            <% %>
+            <div class="coursecard" style="background-image: url('<%= course.imageUrl %>');">
                 <div class="coursecard__contents">
                     <div class="coursecard__title">
-                        <a href="/courses/<%= courses.id%>" class="coursecard__link"><%= courses.title %></a>
+                        <a href="/courses/<%= course.id%>" class="coursecard__link"><%= course.title %></a>
 					</div>
-					<img src="<%= courses.imageUrl %>">
+		
                     <div class="coursecard__tags">
                         <div class="coursecard__tag">CSS</div>
                         <div class="coursecard__tag">SASS</div>
@@ -19,7 +20,7 @@
                     </div>
                     <div class="coursecard__footer">
                         <div class="coursecard__price">
-                            $<%= courses.price %>
+                            $<%= course.price %>
                         </div>
                         <div class="coursecard__starrating">
                             <img src="./assets/star-filled.svg" />
@@ -37,4 +38,4 @@
 	
 </main>
 		
-		<% include partials/footer %>
+<% include partials/footer %>
