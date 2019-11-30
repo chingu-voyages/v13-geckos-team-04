@@ -1,28 +1,17 @@
-    <% include partials/header %>
-
-    <p>
-        Hello World, This is Code Reviews landing page! Go team! We are Sivan, Dario, and Noah!
-    </p>
-
-    <% if (typeof (searchFor) != "undefined" && searchFor != "") { %>
-        <h1 class="h1">Search Results For: <%= searchFor %> </h1>
-
-        <% if (reviews.length == 0) {%>
-            <div class="noResults">
-                <img src="assets/noResults.gif" />
-            </div>
-        <% } %>
-
-    <% } %>
-
-
-    <main class="mainAllCourses">
-        <% reviews.forEach((reviews) => { %>
+<% include partials/header %>
+    
+   <p>
+	   Hello World, This is Code Reviews landing page! Go team! We are Sivan, Dario, and Noah!
+		</p>
+		
+<main class="mainAllCourses">
+        <% courses.forEach((courses) => { %>
             <div class="coursecard">
                 <div class="coursecard__contents">
                     <div class="coursecard__title">
-                        <a href="/courses/<%= reviews.id%>" class="coursecard__link"><%= reviews.title %></a>
-                    </div>
+                        <a href="/courses/<%= courses.id%>" class="coursecard__link"><%= courses.title %></a>
+					</div>
+					<img src="<%= courses.imageUrl %>">
                     <div class="coursecard__tags">
                         <div class="coursecard__tag">CSS</div>
                         <div class="coursecard__tag">SASS</div>
@@ -30,7 +19,7 @@
                     </div>
                     <div class="coursecard__footer">
                         <div class="coursecard__price">
-                            $<%= reviews.price %>
+                            $<%= courses.price %>
                         </div>
                         <div class="coursecard__starrating">
                             <img src="./assets/star-filled.svg" />
@@ -39,15 +28,13 @@
                             <img src="./assets/star-filled.svg" />
                             <img src="./assets/star-empty.svg" />
                         </div>
-                        <div class="coursecard__votecount">
-                            (37 votes)
-                        </div>
+                        <div class="coursecard__votecount">(37 votes)</div>
                     </div>
                 </div>
             </div>
-        <% }); %>
-    </main>
-    <% include partials/footer %>
-
-</body>
-</html>
+					
+		<% }); %>
+	
+</main>
+		
+		<% include partials/footer %>
