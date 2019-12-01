@@ -31,14 +31,6 @@
 <h2>User Reviews</h2>
 <Button class="newReview__button" onclick="showNewReview();">Add a review</Button>
 
-<% foundReviews.forEach(review => { %>
-
-  <%= review.reviewTitle %>
-  <%= review.rating %>
-  <%= review.reviewDetails %>
-
-<% }) %>
-
 <div>
   <img src="/assets/star-filled.svg" />
   <img src="/assets/star-filled.svg" />
@@ -84,10 +76,20 @@
   <progress max="100" value="0"> 0% </progress>
 </div>
 
-<a href="/courses/<%= foundCourse._id %>/edit">Click here to edit</a>
+<% foundReviews.forEach(review => { %>
+
+  <div class="review">
+    <div class="review__title"><%= review.reviewTitle %></div>
+    <div class="review__rating">stars: <%= review.rating %></div>
+    <div class="review__details"><%= review.reviewDetails %></div>
+  </div>
+
+<% }) %>
+
+<a href="/courses/<%= foundCourse._id %>/edit">Click here to edit the course</a>
 <form action="/courses/<%= foundCourse._id %>?_method=DELETE" method="POST">
 	<button>
-		DELETE!
+		DELETE COURSE!
 	</button>
 </form>
 
