@@ -82,7 +82,7 @@
   <div class="newReview__background"></div>
   <div class="newReview__container">
     <div class="newReview__header">
-      <h3 class="h3 newReview__h3">New Review</h3>
+      <h3 class="h3 newReview__h3">New Review For: <%= foundCourse.title %></h3>
       <img src="/assets/closeBtn.png" class="newReview__img" onclick="hideNewReview();" title="Close" alt="Close">
     </div>
     <form action="/newReview" method="post" class="newReviewForm" name="newReviewForm" onsubmit="return (validateNewReview());">
