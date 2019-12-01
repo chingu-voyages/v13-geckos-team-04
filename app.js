@@ -43,15 +43,21 @@ const courseSchema = new mongoose.Schema({
 	author: String,
 	authorUrl: String,
 	courseUrl: String,
-	review: String,
 	price: Number,
 	isFree: Boolean,
-	reviewTitle: String,
-	reviewDetails: String
 });
 
 const Course = mongoose.model("Course", courseSchema);
 
+const reviewSchema = new mongoose.Schema({
+	id: String,
+	courseId: String,
+	rating: Number,
+	reviewTitle: String,
+	reviewDetails: String,
+});
+
+const Review = mongoose.model("Review", reviewSchema);
 
 app.get("/", (req, res) => {
 	res.redirect("/courses");
@@ -59,7 +65,7 @@ app.get("/", (req, res) => {
 
 // Index - Show all courses
 app.get("/courses", (req, res) => {
-// 	Get all reviews from DB 
+// 	Get all courses from DB 
 	Course.find({}, (err, allCourses) => {
 		if (err) {
 			console.log(err);
@@ -123,6 +129,21 @@ app.get("/courses/:id/edit", (req, res) => {
 			res.render("edit", {course: foundCourse});
 		}
 	});
+});
+
+app.post("/newReview", (req, res) => {
+
+	const newReview = req.body;
+
+	Review.create(newReview, (err, rev) => {
+		if (err) {
+			console.log('An error occurred: ', err);
+		} else {
+			console.log('created a new review: ', rev);
+			res.redirect("/courses/" + rev.courseId);
+		}
+	})
+
 });
 
 // Update Route - Take info from edit form and update DB data
