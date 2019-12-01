@@ -31,6 +31,14 @@
 <h2>User Reviews</h2>
 <Button class="newReview__button" onclick="showNewReview();">Add a review</Button>
 
+<% foundReviews.forEach(review => { %>
+
+  <%= review.reviewTitle %>
+  <%= review.rating %>
+  <%= review.reviewDetails %>
+
+<% }) %>
+
 <div>
   <img src="/assets/star-filled.svg" />
   <img src="/assets/star-filled.svg" />
