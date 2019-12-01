@@ -77,6 +77,12 @@
 </div>
 
 <a href="/courses/<%= foundCourse._id %>/edit">Click here to edit</a>
+<form action="/courses/<%= foundCourse._id %>?_method=DELETE" method="POST">
+	<button>
+		DELETE!
+	</button>
+</form>
+
 
   <% include partials/footer %>
     
