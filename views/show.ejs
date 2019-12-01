@@ -1,35 +1,35 @@
 <% include partials/header %>
+<script type="text/javascript" src="/js/show.js"></script>
 
-    <h1 class="h1"><%= foundCourse.title %></h1>
-    <div class="course__starrating">
-      <img src="/assets/star-filled.svg" />
-      <img src="/assets/star-filled.svg" />
-      <img src="/assets/star-filled.svg" />
-      <img src="/assets/star-filled.svg" />
-      <img src="/assets/star-empty.svg" />
-    </div>
+<h1 class="h1"><%= foundCourse.title %></h1>
+<div class="course__starrating">
+  <img src="/assets/star-filled.svg" />
+  <img src="/assets/star-filled.svg" />
+  <img src="/assets/star-filled.svg" />
+  <img src="/assets/star-filled.svg" />
+  <img src="/assets/star-empty.svg" />
+</div>
 
 <h3>By: <%= foundCourse.author %></h3>
-
-    <div>
-      <%= foundCourse.description %>
-    </div>
+<div>
+  <%= foundCourse.description %>
+</div>
 
 <div>
 <% if (foundCourse.price === 0) { %>
-  Free!
+    Free!
 <% } else { %>
-  $<%= foundCourse.price %>
+    $<%= foundCourse.price %>
 <% } %>
-
 </div>
+
 <div>Check it out <b>here</b>: <a href="<%= foundCourse.courseUrl %>" target="_blank"><%= foundCourse.courseUrl %></a></div>
 
 <img src="<%= foundCourse.imageUrl %>" /> 
 <hr class="hr"/> 
 
 <h2>User Reviews</h2>
-<Button>Add a review</Button>
+<Button class="newReview__button" onclick="showNewReview();">Add a review</Button>
 
 <div>
   <img src="/assets/star-filled.svg" />
@@ -37,7 +37,7 @@
   <img src="/assets/star-filled.svg" />
   <img src="/assets/star-filled.svg" />
   <img src="/assets/star-filled.svg" />
-  <progress id="file" max="100" value="100"> 100% </progress>
+  <progress max="100" value="100"> 100% </progress>
 </div>
 
 <div>
@@ -46,7 +46,7 @@
   <img src="/assets/star-filled.svg" />
   <img src="/assets/star-filled.svg" />
   <img src="/assets/star-empty.svg" />
-  <progress id="file" max="100" value="0"> 0% </progress>
+  <progress max="100" value="0"> 0% </progress>
 </div>     
 
 <div>
@@ -55,7 +55,7 @@
   <img src="/assets/star-filled.svg" />
   <img src="/assets/star-empty.svg" />
   <img src="/assets/star-empty.svg" />
-  <progress id="file" max="100" value="0"> 0% </progress>
+  <progress max="100" value="0"> 0% </progress>
 </div>
 
 <div>
@@ -64,7 +64,7 @@
   <img src="/assets/star-empty.svg" />
   <img src="/assets/star-empty.svg" />
   <img src="/assets/star-empty.svg" />
-  <progress id="file" max="100" value="0"> 0% </progress>
+  <progress max="100" value="0"> 0% </progress>
 </div>
 
 <div>
@@ -73,10 +73,38 @@
   <img src="/assets/star-empty.svg" />
   <img src="/assets/star-empty.svg" />
   <img src="/assets/star-empty.svg" />
-  <progress id="file" max="100" value="0"> 0% </progress>
+  <progress max="100" value="0"> 0% </progress>
 </div>
 
 <a href="/courses/<%= foundCourse._id %>/edit">Click here to edit</a>
 
-  <% include partials/footer %>
+<div class="newReview" id="newReview">
+  <div class="newReview__background"></div>
+  <div class="newReview__container">
+    <div class="newReview__header">
+      <h3 class="h3 newReview__h3">New Review For: <%= foundCourse.title %></h3>
+      <img src="/assets/closeBtn.png" class="newReview__img" onclick="hideNewReview();" title="Close" alt="Close">
+    </div>
+    <form action="/newReview" method="post" class="newReviewForm" name="newReviewForm" onsubmit="return (validateNewReview());">
+      <input type="hidden" name="courseId" value="<%= foundCourse.id %>" />
+      <div class="newReviewForm__row">
+        <div class="newReviewForm__text">Your Rating:&nbsp;&nbsp;</div>
+        <div>
+          <div class="starsReview starsReview__1" title="Waste of time!" onclick="selectStar(1);"></div>
+          <div class="starsReview starsReview__2" title="Not good" onclick="selectStar(2);"></div>
+          <div class="starsReview starsReview__3" title="It's OK" onclick="selectStar(3);"></div>
+          <div class="starsReview starsReview__4" title="Good!" onclick="selectStar(4);"></div>
+          <div class="starsReview starsReview__5" title="Perfect course!" onclick="selectStar(5);"></div>
+          <input type="hidden" name="rating" class="newReview__rating" value="0"/>
+        </div>
+      </div>
     
+      <input type="text" class="newReviewForm__input" name="reviewTitle" placeholder="Review title (optional):" />
+      <textarea class="newReviewForm__textarea" name="reviewDetails" maxlength="400" placeholder="Details (optional):"></textarea>
+      <div class="newReviewForm__error"></div>
+      <input type="submit" class="newReviewForm__submit" />
+    </form>
+  </div>
+</div>
+		 
+<% include partials/footer %>    
