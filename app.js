@@ -136,6 +136,19 @@ app.put("/courses/:id", (req, res) => {
 	});
 });
 
+// Delete Route - Find course by ID and delete
+
+app.delete("/courses/:id", (req, res) => {
+			Course.findByIdAndRemove(req.params.id, (err, deletedCourse) => {
+				if(err) {
+					res.render("error");
+				} else {
+					res.redirect("/courses")
+				}
+			});
+		   
+		   });
+
 
 app.post("/search", (req, res) => {
 	Course.find( {'title': {'$regex': req.body.searchText, '$options' : 'i'} }, (err, courses) => {
