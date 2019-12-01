@@ -115,7 +115,13 @@ app.get("/courses/:id", (req, res) => {
 			console.log('No course found with id ' + id);
 			return res.redirect("/error");
 		} else {
-			res.render("show", {foundCourse: foundCourse});
+			Review.find({courseId: id}, (err, foundReviews) => {
+				if (err) {
+					console.log('error: ', err);
+				} else {					
+					res.render("show", {foundCourse, foundReviews});
+				}
+			});
 		}
 	});
 });
