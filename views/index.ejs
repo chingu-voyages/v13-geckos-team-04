@@ -25,9 +25,13 @@
                             <% }) %>                            
                         </div>
                         <div class="coursecard__footer">
-                            <div class="coursecard__price">
-                                $<%= course.price %>
-                            </div>
+                            <% if (course.price !== 0) { %>
+                                <div class="coursecard__price">
+                                    $<%= Math.round(course.price*100)/100 %>
+                                </div>
+                            <% } else { %>
+                                <div class="coursecard__pricefree">Free!</div>
+                            <% } %>
                             <div class="coursecard__starrating">
                                 <img src="./assets/star-filled.svg" />
                                 <img src="./assets/star-filled.svg" />

@@ -87,7 +87,7 @@ body {
   
   .coursecard__pricefree {
     background-color: var(--freecourse-color);
-    padding: 0.3rem 1rem;
+    padding: 0.3rem 0.6rem;
     border: 2px solid var(--primary-color);
   }
   
