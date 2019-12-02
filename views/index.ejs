@@ -1,4 +1,15 @@
 <% include partials/header %>
+
+<% if (typeof (searchFor) != "undefined" && searchFor != "") { %>
+    <h1 class="h1">Search Results For: <%= searchFor %> </h1>
+
+    <% if (courses.length == 0) {%>
+        <div class="noResults">
+            <img src="assets/noResults.gif" />
+        </div>
+    <% } %>
+
+<% } %>
 		
 <main class="mainAllCourses">
         <% courses.forEach(course => { %>
@@ -10,9 +21,9 @@
 					</div>
                     <div class="coursecard__tags-and-footer">
                         <div class="coursecard__tags">
-                            <div class="coursecard__tag">CSS</div>
-                            <div class="coursecard__tag">SASS</div>
-                            <div class="coursecard__tag">Styling</div>
+                            <% course.tags.forEach(tag => { %>
+                                <div class="coursecard__tag"><%= tag %></div>                            
+                            <% }) %>                            
                         </div>
                         <div class="coursecard__footer">
                             <div class="coursecard__price">

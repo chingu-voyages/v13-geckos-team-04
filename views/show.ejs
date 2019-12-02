@@ -15,6 +15,12 @@
   <%= foundCourse.description %>
 </div>
 
+<div class="showCourse__tagList">
+    <% foundCourse.tags.forEach(tag => { %> 
+      <div class="showCourse__tag" name="searchText" value="<%= tag %>" onclick="searchByTag('<%= tag %>');"><%= tag %></div>
+    <% }); %>
+</div>
+
 <div>
 <% if (foundCourse.price === 0) { %>
     Free!

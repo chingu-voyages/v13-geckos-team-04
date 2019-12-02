@@ -16,8 +16,8 @@
 				<ul class="tagList">
 					<% tags.forEach ((tag) => { %>
 					<li class="tagList__item">
-						<input type="checkbox" value="tag_<%= tag.id %>" name="tags" id="tag_<%= tag.id %>" />
-						<label for="tag_<%= tag.id %>"><%= tag.title %> </label>
+						<input type="checkbox" value="<%= tag.title %>" name="tags" id="tag.title" />
+						<label for="<%= tag.title %>"><%= tag.title %> </label>
 					</li>
 					<% }); %>
 				</ul>

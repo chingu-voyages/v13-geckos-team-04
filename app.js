@@ -47,7 +47,8 @@ const courseSchema = new mongoose.Schema({
 	price: Number,
 	isFree: Boolean,
 	reviewTitle: String,
-	reviewDetails: String
+	reviewDetails: String,
+	tags: [String]
 });
 
 const Course = mongoose.model("Course", courseSchema);
@@ -87,10 +88,9 @@ app.get("/courses", (req, res) => {
 // Create - Route to handle info from form and add a new course to DB
 app.post("/courses", (req, res) => {
 // 	Get fields from form and save in newReview variable
-	const {title, author, description, authorUrl, reviewTitle, reviewDetails, price, isFree, courseUrl, imageUrl} = req.body;
-
+	const {title, author, description, authorUrl, reviewTitle, reviewDetails, price, isFree, courseUrl, imageUrl, tags} = req.body;
 // 	Save as new var object
-	const newCourse = {title, author, authorUrl, reviewTitle, reviewDetails, price, isFree, courseUrl, imageUrl, description };
+	const newCourse = {title, author, description, authorUrl, reviewTitle, reviewDetails, price, isFree, courseUrl, imageUrl, tags};
 // 	Add to data base
 	Course.create(newCourse, (err, newlyCreated) => {
 		if(err) {
@@ -98,9 +98,8 @@ app.post("/courses", (req, res) => {
 		} else {
 			console.log(newlyCreated);
 			res.redirect("/courses/" + newlyCreated._id);
-		}
-		
-	})
+		}		
+	});	
 });
 	
 	// New - Route to show form for new courses
@@ -166,13 +165,23 @@ app.delete("/courses/:id", (req, res) => {
 
 
 app.post("/search", (req, res) => {
-	Course.find( {'title': {'$regex': req.body.searchText, '$options' : 'i'} }, (err, courses) => {
-		if (err) {
-			console.log(err)
-		} else {
-			res.render("index",{courses: courses, searchFor: req.body.searchText});
-		}
-	} );
+	if (req.body.searchInField == "tags") {
+		Course.find( {tags: req.body.searchText}, (err, courses) => {
+			if (err) {
+				console.log(err)
+			} else {
+				res.render("index",{courses: courses, searchFor: "Topic: "+req.body.searchText});
+			}
+		} );
+	} else {
+		Course.find( {'title': {'$regex': req.body.searchText, '$options' : 'i'} }, (err, courses) => {
+			if (err) {
+				console.log(err)
+			} else {
+				res.render("index",{courses: courses, searchFor: req.body.searchText});
+			}
+		});
+	}
 });
 		
 
