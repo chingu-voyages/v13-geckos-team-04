@@ -82,10 +82,20 @@
   <progress max="100" value="0"> 0% </progress>
 </div>
 
-<a href="/courses/<%= foundCourse._id %>/edit">Click here to edit</a>
+<% foundReviews.forEach(review => { %>
+
+  <div class="review">
+    <div class="review__title"><%= review.reviewTitle %></div>
+    <div class="review__rating">stars: <%= review.rating %></div>
+    <div class="review__details"><%= review.reviewDetails %></div>
+  </div>
+
+<% }) %>
+
+<a href="/courses/<%= foundCourse._id %>/edit">Click here to edit the course</a>
 <form action="/courses/<%= foundCourse._id %>?_method=DELETE" method="POST">
 	<button>
-		DELETE!
+		DELETE COURSE!
 	</button>
 </form>
 
