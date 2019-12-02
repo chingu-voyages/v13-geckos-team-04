@@ -46,8 +46,6 @@ const courseSchema = new mongoose.Schema({
 	review: String,
 	price: Number,
 	isFree: Boolean,
-	reviewTitle: String,
-	reviewDetails: String,
 	tags: [String]
 });
 
