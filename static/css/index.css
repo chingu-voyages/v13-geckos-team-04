@@ -102,3 +102,7 @@ body {
 .card {
     flex: 0 1 calc(25% - 1em);
 }
+
+.noResults {
+  text-align: center;
+}

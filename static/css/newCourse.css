@@ -2,11 +2,11 @@
 	display: flex;
 	justify-content: center;
 }
+
 .addCourseForm {
 	display: flex;
 	flex-direction: column;
 	width: 80%;
-
 }
 
 .addCourseForm__textInput {
@@ -39,6 +39,16 @@
 
 .addCourseForm__textArea::placeholder {
 	color: #94b4c1;
+}
+
+.tagList {
+	list-style: none;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.tagList__item {
+	flex: 1 0 25%;
 }
 
 .addCourseTags__select {
