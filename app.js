@@ -58,6 +58,15 @@ const tagSchema = new mongoose.Schema({
 });
 const Tag = mongoose.model("Tag", tagSchema);
 
+const reviewSchema = new mongoose.Schema({
+	id: String,
+	courseId: String,
+	rating: Number,
+	reviewTitle: String,
+	reviewDetails: String,
+});
+
+const Review = mongoose.model("Review", reviewSchema);
 
 app.get("/", (req, res) => {
 	res.redirect("/courses");
@@ -146,15 +155,14 @@ app.put("/courses/:id", (req, res) => {
 // Delete Route - Find course by ID and delete
 
 app.delete("/courses/:id", (req, res) => {
-			Course.findByIdAndRemove(req.params.id, (err, deletedCourse) => {
-				if(err) {
-					res.render("error");
-				} else {
-					res.redirect("/courses")
-				}
-			});
-		   
-		   });
+	Course.findByIdAndRemove(req.params.id, (err, deletedCourse) => {
+		if(err) {
+			res.render("error");
+		} else {
+			res.redirect("/courses")
+		}
+	});
+});
 
 
 app.post("/search", (req, res) => {
