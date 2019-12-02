@@ -12,16 +12,15 @@
 				
 				<div class="spacer20"></div>
 				
-				<div class="addCourseTags">
-					<select class="addCourseTags__select">
-						<option value="none">Select up to 5 tech tags</option>
-
-						<% tags.forEach ((tag) => { %>
-						<option value="<%= tag.id %>"><%= tag.title %></option> 
-						<% }); %>
-
-					</select>
-				</div>
+				Select up to 5 tags:
+				<ul class="tagList">
+					<% tags.forEach ((tag) => { %>
+					<li class="tagList__item">
+						<input type="checkbox" value="tag_<%= tag.id %>" name="tags" id="tag_<%= tag.id %>" />
+						<label for="tag_<%= tag.id %>"><%= tag.title %> </label>
+					</li>
+					<% }); %>
+				</ul>
 				
 				<div class="spacer20"></div>
 

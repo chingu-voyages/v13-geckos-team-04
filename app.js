@@ -52,6 +52,12 @@ const courseSchema = new mongoose.Schema({
 
 const Course = mongoose.model("Course", courseSchema);
 
+// Tech tags for new courses
+const tagSchema = new mongoose.Schema({
+	title: String,
+});
+const Tag = mongoose.model("Tag", tagSchema);
+
 
 app.get("/", (req, res) => {
 	res.redirect("/courses");
@@ -90,12 +96,13 @@ app.post("/courses", (req, res) => {
 	
 	// New - Route to show form for new courses
 app.get("/courses/new", (req, res) => {
-		const tags = [{id: 1, title: "CSS"}, 
-					{id: 2, title: "JS"}, 
-					{id: 3, title: "NodeJS"}, 
-					{id: 4, title: "Express"}, 
-					{id: 5, title: "MongoDB"}];
-		res.render("newcourse", {tags: tags});
+	Tag.find({}, null, {sort: 'title'}, (err, allTags) => {
+		if (err) {
+			console.log(err);
+		} else {
+			res.render("newcourse",{tags: allTags});
+		}
+	});
 });
 	
 // 	Show - Show specific course with additional details by using ID to grab it from the data base
