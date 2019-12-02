@@ -1,3 +1,12 @@
+html {
+  position: relative;
+  min-height: 100vh;
+}
+
+body {
+  margin: 0 0 49px;
+}
+
 .mainAllCourses {
     display: flex;
     flex-wrap: wrap;
