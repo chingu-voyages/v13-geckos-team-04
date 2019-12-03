@@ -12,26 +12,25 @@
 				
 				<div class="spacer20"></div>
 				
-				<div class="addCourseTags">
-					<select class="addCourseTags__select">
-						<option value="none">Select up to 5 tech tags</option>
-
-						<% tags.forEach ((tag) => { %>
-						<option value="<%= tag.id %>"><%= tag.title %></option> 
-						<% }); %>
-
-					</select>
-				</div>
+				Select up to 5 tags:
+				<ul class="tagList">
+					<% tags.forEach ((tag) => { %>
+					<li class="tagList__item">
+						<input type="checkbox" value="<%= tag.title %>" name="tags" id="tag.title" />
+						<label for="<%= tag.title %>"><%= tag.title %> </label>
+					</li>
+					<% }); %>
+				</ul>
 				
 				<div class="spacer20"></div>
 
 				<textarea name="description" class="addCourseForm__textArea" placeholder="Tell us more about the course:"></textarea>
 				<div class="addCoursePriceLine">
-					<input type="number" class="addCourseForm__textInput addCourseForm__textInput--short" name="price" placeholder="Price:" />
+					<input type="number" class="addCourseForm__textInput addCourseForm__textInput--short" name="price" placeholder="Price:" step="0.01" />
 					<input type="checkbox" class="addCourseForm__checkbox" name="isFree"><label for="isFree" class="addCourseForm__label">Free!</label>
 				</div>
 				
-				<div class="spacer20"></div>
+				<div class="spacer20"></div>    
 				<input class="addCourseForm__submit" type="submit" />
 			</form>
 		</main>

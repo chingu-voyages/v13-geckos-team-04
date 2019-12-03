@@ -135,6 +135,20 @@
 	color: #FF0000;
 }
 
+.showCourse__tagList {
+	display: flex;
+}
+
+.showCourse__tag {
+	background-color: #94b4c1;
+	color: #ffffff;
+	font-size: 0.8rem;
+	padding: 0.2rem 0.5rem;
+	border-radius: 4px;
+	cursor: pointer;
+	margin: 1rem 0.2rem 1rem 0;
+}
+
 .review {
 	background-color: lightgray;
 	margin: .5rem;

@@ -29,3 +29,10 @@ var validateNewReview = function () {
         return true;
     }
 };
+
+// Search by tag name
+var searchByTag = function (str) {
+    document.forms["searchForm"]["searchInField"].value = 'tags';
+    document.forms["searchForm"]["searchText"].value = str;
+    document.forms["searchForm"].submit();
+};
