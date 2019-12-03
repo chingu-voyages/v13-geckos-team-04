@@ -137,8 +137,13 @@ app.get("/courses/:id", (req, res) => {
 					if (isNaN(foundCourse.rating)) {
 						foundCourse.rating = 0;
 					}
+
+					let ratingsByStars = [0,0,0,0,0,0];
+					foundReviews.forEach(review => {
+						ratingsByStars[review.rating]++; 
+					});
 										
-					res.render("show", {foundCourse, foundReviews});
+					res.render("show", {foundCourse, foundReviews, ratingsByStars});
 				}
 			});
 		}

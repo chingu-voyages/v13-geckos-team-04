@@ -208,3 +208,21 @@
 .totalvotes__stars--5star {
 	width: 120px;
 }
+
+.showCourse__starrating {
+	font-size: 1.3rem;
+	display: flex;
+	justify-content: center;
+}
+
+.showCourse__starrating__starsWrapper {
+	height: 24px;
+    width: 120px;
+    background-image: url("../assets/star-empty.svg");
+}
+
+.showCourse__starrating__star {
+	background-image: url("../assets/star-filled.svg");
+    height: 24px;
+    position: absolute;
+}

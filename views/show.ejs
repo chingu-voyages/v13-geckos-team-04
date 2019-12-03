@@ -2,14 +2,16 @@
 <script type="text/javascript" src="/js/show.js"></script>
 
 <h1 class="h1"><%= foundCourse.title %></h1>
-<p>Course rating: <%= foundCourse.rating %>
-  (<%= foundCourse.reviewCount %> <% if (foundCourse.reviewCount && foundCourse.reviewCount === 1) { %>vote<% } else { %>votes<% } %>)</p>
-
-<div class="coursecard__starrating">
-    <div class="coursecard__starrating__starsWrapper">
-        <div class="coursecard__starrating__star" style="width:<%= 24 * foundCourse.rating %>px;"></div>
-    </div>
+<div class="showCourse__starrating">
+  <div class="showCourse__starrating__starsWrapper">
+      <div class="showCourse__starrating__star" style="width:<%= 24 * foundCourse.rating %>px;"></div>
+  </div>&nbsp;
+  <div class="showCourse__starrating__text">
+    <%= foundCourse.rating %>
+    (<%= foundCourse.reviewCount %> <% if (foundCourse.reviewCount && foundCourse.reviewCount === 1) { %>vote<% } else { %>votes<% } %>)
+  </div>
 </div>
+
 
 <h3>By: <%= foundCourse.author %></h3>
 <div>
@@ -38,40 +40,15 @@
 <h2>User Reviews</h2>
 <Button class="newReview__button" onclick="showNewReview();">Add a review</Button>
 
-<div class="totalvotes">
+<% for (i=ratingsByStars.length-1; i>0; i--) { %>
+  <div class="totalvotes">
     <div class="totalvotes__starsWrapper">
-        <div class="totalvotes__stars totalvotes__stars--1star"></div>
+        <div class="totalvotes__stars totalvotes__stars--<%= i %>star"></div>
     </div>
-    <progress max="100" value="100"> 100% </progress>
-</div>
-
-<div class="totalvotes">
-    <div class="totalvotes__starsWrapper">
-        <div class="totalvotes__stars totalvotes__stars--2star"></div>
-    </div>
-    <progress max="100" value="100"> 100% </progress>
-</div>
-
-<div class="totalvotes">
-    <div class="totalvotes__starsWrapper">
-        <div class="totalvotes__stars totalvotes__stars--3star"></div>
-    </div>
-    <progress max="100" value="100"> 100% </progress>
-</div>
-
-<div class="totalvotes">
-    <div class="totalvotes__starsWrapper">
-        <div class="totalvotes__stars totalvotes__stars--4star"></div>
-    </div>
-    <progress max="100" value="100"> 100% </progress>
-</div>
-
-<div class="totalvotes">
-    <div class="totalvotes__starsWrapper">
-        <div class="totalvotes__stars totalvotes__stars--5star"></div>
-    </div>
-    <progress max="100" value="100"> 100% </progress>
-</div>
+    <progress max="100" value="<%= foundCourse.reviewCount == 0 ? 0 : Math.floor(ratingsByStars[i] * 100 / foundCourse.reviewCount * 100) / 100 %>">  </progress>
+    <span><%= foundCourse.reviewCount == 0 ? 0 : Math.floor(ratingsByStars[i] * 100 / foundCourse.reviewCount * 100) / 100 %>%</span>
+  </div>  
+<% }; %>
 
 <% foundReviews.forEach(review => { %>
 
