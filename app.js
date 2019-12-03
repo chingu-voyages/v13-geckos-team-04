@@ -43,7 +43,6 @@ const courseSchema = new mongoose.Schema({
 	author: String,
 	authorUrl: String,
 	courseUrl: String,
-	review: String,
 	price: Number,
 	isFree: Boolean,
 	tags: [String]
@@ -73,7 +72,7 @@ app.get("/", (req, res) => {
 
 // Index - Show all courses
 app.get("/courses", (req, res) => {
-// 	Get all reviews from DB 
+// 	Get all courses from DB 
 	Course.find({}, (err, allCourses) => {
 		if (err) {
 			console.log(err);
@@ -122,7 +121,13 @@ app.get("/courses/:id", (req, res) => {
 			console.log('No course found with id ' + id);
 			return res.redirect("/error");
 		} else {
-			res.render("show", {foundCourse: foundCourse});
+			Review.find({courseId: id}, (err, foundReviews) => {
+				if (err) {
+					console.log('error: ', err);
+				} else {					
+					res.render("show", {foundCourse, foundReviews});
+				}
+			});
 		}
 	});
 });
@@ -136,6 +141,21 @@ app.get("/courses/:id/edit", (req, res) => {
 			res.render("edit", {course: foundCourse});
 		}
 	});
+});
+
+app.post("/newReview", (req, res) => {
+
+	const newReview = req.body;
+
+	Review.create(newReview, (err, rev) => {
+		if (err) {
+			console.log('An error occurred: ', err);
+		} else {
+			console.log('created a new review: ', rev);
+			res.redirect("/courses/" + rev.courseId);
+		}
+	})
+
 });
 
 // Update Route - Take info from edit form and update DB data
