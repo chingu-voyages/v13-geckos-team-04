@@ -79,6 +79,12 @@ app.get("/courses", (req, res) => {
 		if (err) {
 			console.log(err);
 		} else {
+			allCourses.forEach(course => {
+				course.rating = Math.floor((course.ratingTotal / course.reviewCount) * 100) / 100;
+				if (isNaN(course.rating)) {
+					course.rating = 0;
+				}
+			});
 			res.render("index",{courses:allCourses});
 		}
 	});
@@ -126,8 +132,18 @@ app.get("/courses/:id", (req, res) => {
 			Review.find({courseId: id}, (err, foundReviews) => {
 				if (err) {
 					console.log('error: ', err);
-				} else {					
-					res.render("show", {foundCourse, foundReviews});
+				} else {
+					foundCourse.rating = Math.round(foundCourse.ratingTotal/foundCourse.reviewCount * 100)/100;
+					if (isNaN(foundCourse.rating)) {
+						foundCourse.rating = 0;
+					}
+
+					let ratingsByStars = [0,0,0,0,0,0];
+					foundReviews.forEach(review => {
+						ratingsByStars[review.rating]++; 
+					});
+										
+					res.render("show", {foundCourse, foundReviews, ratingsByStars});
 				}
 			});
 		}
@@ -200,6 +216,12 @@ app.post("/search", (req, res) => {
 			if (err) {
 				console.log(err)
 			} else {
+				courses.forEach(course => {
+					course.rating = Math.floor((course.ratingTotal / course.reviewCount) * 100) / 100;
+					if (isNaN(course.rating)) {
+						course.rating = 0;
+					}
+				});
 				res.render("index",{courses: courses, searchFor: "Topic: "+req.body.searchText});
 			}
 		} );
@@ -208,6 +230,12 @@ app.post("/search", (req, res) => {
 			if (err) {
 				console.log(err)
 			} else {
+				courses.forEach(course => {
+					course.rating = Math.floor((course.ratingTotal / course.reviewCount) * 100) / 100;
+					if (isNaN(course.rating)) {
+						course.rating = 0;
+					}
+				});
 				res.render("index",{courses: courses, searchFor: req.body.searchText});
 			}
 		});

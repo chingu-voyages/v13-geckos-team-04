@@ -160,3 +160,69 @@
 	font-size: 1.3rem;
 	font-weight: bold;
 }
+
+.review__starrating__starsWrapper {
+	height: 24px;
+    width: 120px;
+    background-image: url("../assets/star-empty.svg");
+}
+
+.review__starrating__filled {
+	background-image: url("../assets/star-filled.svg");
+    height: 24px;
+    position: absolute;
+}
+
+.totalvotes {
+	display: flex;
+}
+
+.totalvotes__starsWrapper {
+	height: 24px;
+    width: 120px;
+    background-image: url("../assets/star-empty.svg");
+}
+
+.totalvotes__stars {
+	background-image: url("../assets/star-filled.svg");
+    height: 24px;
+    position: absolute;
+}
+
+.totalvotes__stars--1star {
+	width: 24px;
+}
+
+.totalvotes__stars--2star {
+	width: 48px;
+}
+
+.totalvotes__stars--3star {
+	width: 72px;
+}
+
+.totalvotes__stars--4star {
+	width: 96px;
+}
+
+.totalvotes__stars--5star {
+	width: 120px;
+}
+
+.showCourse__starrating {
+	font-size: 1.3rem;
+	display: flex;
+	justify-content: center;
+}
+
+.showCourse__starrating__starsWrapper {
+	height: 24px;
+    width: 120px;
+    background-image: url("../assets/star-empty.svg");
+}
+
+.showCourse__starrating__star {
+	background-image: url("../assets/star-filled.svg");
+    height: 24px;
+    position: absolute;
+}

@@ -33,12 +33,12 @@
                                 <div class="coursecard__pricefree">Free!</div>
                             <% } %>
                             <div class="coursecard__starrating">
-                                <img src="./assets/star-filled.svg" />
-                                <img src="./assets/star-filled.svg" />
-                                <img src="./assets/star-filled.svg" />
-                                <img src="./assets/star-filled.svg" />
-                                <img src="./assets/star-empty.svg" />
+                                <div class="coursecard__starrating__starsWrapper">
+                                    <div class="coursecard__starrating__star" style="width:<%= 24 * course.rating %>px;"></div>
+                                </div>
+                                &nbsp;<%= course.rating %>
                             </div>
+                            
                             <div class="coursecard__votecount">(<%= course.reviewCount %>
                                 <% if (course.reviewCount && course.reviewCount === 1) { %> vote<% } else { %> votes<% } %>)</div>
                         </div>
