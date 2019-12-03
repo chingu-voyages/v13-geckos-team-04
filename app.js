@@ -132,7 +132,12 @@ app.get("/courses/:id", (req, res) => {
 			Review.find({courseId: id}, (err, foundReviews) => {
 				if (err) {
 					console.log('error: ', err);
-				} else {					
+				} else {
+					foundCourse.rating = Math.round(foundCourse.ratingTotal/foundCourse.reviewCount * 100)/100;
+					if (isNaN(foundCourse.rating)) {
+						foundCourse.rating = 0;
+					}
+										
 					res.render("show", {foundCourse, foundReviews});
 				}
 			});

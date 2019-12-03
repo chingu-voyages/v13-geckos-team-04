@@ -2,15 +2,13 @@
 <script type="text/javascript" src="/js/show.js"></script>
 
 <h1 class="h1"><%= foundCourse.title %></h1>
-<p>Course rating: <%= Math.round(foundCourse.ratingTotal/foundCourse.reviewCount * 100)/100 %>
+<p>Course rating: <%= foundCourse.rating %>
   (<%= foundCourse.reviewCount %> <% if (foundCourse.reviewCount && foundCourse.reviewCount === 1) { %>vote<% } else { %>votes<% } %>)</p>
 
-<div class="course__starrating">
-  <img src="/assets/star-filled.svg" />
-  <img src="/assets/star-filled.svg" />
-  <img src="/assets/star-filled.svg" />
-  <img src="/assets/star-filled.svg" />
-  <img src="/assets/star-empty.svg" />
+<div class="coursecard__starrating">
+    <div class="coursecard__starrating__starsWrapper">
+        <div class="coursecard__starrating__star" style="width:<%= 24 * foundCourse.rating %>px;"></div>
+    </div>
 </div>
 
 <h3>By: <%= foundCourse.author %></h3>
@@ -40,56 +38,50 @@
 <h2>User Reviews</h2>
 <Button class="newReview__button" onclick="showNewReview();">Add a review</Button>
 
-<div>
-  <img src="/assets/star-filled.svg" />
-  <img src="/assets/star-filled.svg" />
-  <img src="/assets/star-filled.svg" />
-  <img src="/assets/star-filled.svg" />
-  <img src="/assets/star-filled.svg" />
-  <progress max="100" value="100"> 100% </progress>
+<div class="totalvotes">
+    <div class="totalvotes__starsWrapper">
+        <div class="totalvotes__stars totalvotes__stars--1star"></div>
+    </div>
+    <progress max="100" value="100"> 100% </progress>
 </div>
 
-<div>
-  <img src="/assets/star-filled.svg" />
-  <img src="/assets/star-filled.svg" />
-  <img src="/assets/star-filled.svg" />
-  <img src="/assets/star-filled.svg" />
-  <img src="/assets/star-empty.svg" />
-  <progress max="100" value="0"> 0% </progress>
-</div>     
-
-<div>
-  <img src="/assets/star-filled.svg" />
-  <img src="/assets/star-filled.svg" />
-  <img src="/assets/star-filled.svg" />
-  <img src="/assets/star-empty.svg" />
-  <img src="/assets/star-empty.svg" />
-  <progress max="100" value="0"> 0% </progress>
+<div class="totalvotes">
+    <div class="totalvotes__starsWrapper">
+        <div class="totalvotes__stars totalvotes__stars--2star"></div>
+    </div>
+    <progress max="100" value="100"> 100% </progress>
 </div>
 
-<div>
-  <img src="/assets/star-filled.svg" />
-  <img src="/assets/star-filled.svg" />
-  <img src="/assets/star-empty.svg" />
-  <img src="/assets/star-empty.svg" />
-  <img src="/assets/star-empty.svg" />
-  <progress max="100" value="0"> 0% </progress>
+<div class="totalvotes">
+    <div class="totalvotes__starsWrapper">
+        <div class="totalvotes__stars totalvotes__stars--3star"></div>
+    </div>
+    <progress max="100" value="100"> 100% </progress>
 </div>
 
-<div>
-  <img src="/assets/star-filled.svg" />
-  <img src="/assets/star-empty.svg" />
-  <img src="/assets/star-empty.svg" />
-  <img src="/assets/star-empty.svg" />
-  <img src="/assets/star-empty.svg" />
-  <progress max="100" value="0"> 0% </progress>
+<div class="totalvotes">
+    <div class="totalvotes__starsWrapper">
+        <div class="totalvotes__stars totalvotes__stars--4star"></div>
+    </div>
+    <progress max="100" value="100"> 100% </progress>
+</div>
+
+<div class="totalvotes">
+    <div class="totalvotes__starsWrapper">
+        <div class="totalvotes__stars totalvotes__stars--5star"></div>
+    </div>
+    <progress max="100" value="100"> 100% </progress>
 </div>
 
 <% foundReviews.forEach(review => { %>
 
   <div class="review">
     <div class="review__title"><%= review.reviewTitle %></div>
-    <div class="review__rating">stars: <%= review.rating %></div>
+    <div class="review__rating">
+          <div class="review__starrating__starsWrapper">
+              <div class="review__starrating__filled" style="width:<%= 24 * review.rating %>px;"></div>
+          </div>
+    </div>
     <div class="review__details"><%= review.reviewDetails %></div>
   </div>
 
