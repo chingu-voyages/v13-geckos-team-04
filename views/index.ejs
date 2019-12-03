@@ -39,7 +39,8 @@
                                 <img src="./assets/star-filled.svg" />
                                 <img src="./assets/star-empty.svg" />
                             </div>
-                            <div class="coursecard__votecount">(37 votes)</div>
+                            <div class="coursecard__votecount">(<%= course.reviewCount %>
+                                <% if (course.reviewCount && course.reviewCount === 1) { %> vote<% } else { %> votes<% } %>)</div>
                         </div>
 
                     </div>
