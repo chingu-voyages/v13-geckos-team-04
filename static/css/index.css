@@ -93,8 +93,22 @@ body {
   
   .coursecard__starrating {
     font-size: 1.3rem;
+    display: flex;   
   }
-  
+
+  .coursecard__starrating__starsWrapper {
+    height: 24px;
+    width: 120px;
+    background-image: url("../assets/star-empty.svg");
+  }
+
+  .coursecard__starrating__star {
+    background-image: url("../assets/star-filled.svg");
+    height: 24px;
+    position: absolute;
+    color: transparent;
+  }
+
   .coursecard__votecount {
     font-weight: 500;
   }

@@ -79,6 +79,12 @@ app.get("/courses", (req, res) => {
 		if (err) {
 			console.log(err);
 		} else {
+			allCourses.forEach(course => {
+				course.rating = Math.floor((course.ratingTotal / course.reviewCount) * 100) / 100;
+				if (isNaN(course.rating)) {
+					course.rating = 0;
+				}
+			});
 			res.render("index",{courses:allCourses});
 		}
 	});
