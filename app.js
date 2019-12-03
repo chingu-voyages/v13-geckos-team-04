@@ -158,8 +158,10 @@ app.post("/newReview", (req, res) => {
 			// Update review count and avg rating for the course
 			let course = Course.findOne({_id: newReview.courseId});
 
-			Course.findOneAndUpdate(course, {$inc: {reviewCount: 1}}, (err, updatedCourse) => {
-				console.log('updated course: ', updatedCourse);
+			Course.findOneAndUpdate(course, {$inc: {reviewCount: 1, ratingTotal: newReview.rating}}, (err, updatedCourse) => {
+				if (err) {
+					console.log('error updating the course: ', err);
+				}
 			})
 
 			res.redirect("/courses/" + rev.courseId);

@@ -2,6 +2,9 @@
 <script type="text/javascript" src="/js/show.js"></script>
 
 <h1 class="h1"><%= foundCourse.title %></h1>
+<p>Course rating: <%= Math.round(foundCourse.ratingTotal/foundCourse.reviewCount * 100)/100 %>
+  (<%= foundCourse.reviewCount %> <% if (foundCourse.reviewCount && foundCourse.reviewCount === 1) { %>vote<% } else { %>votes<% } %>)</p>
+
 <div class="course__starrating">
   <img src="/assets/star-filled.svg" />
   <img src="/assets/star-filled.svg" />
