@@ -13,7 +13,7 @@
 		
 <main class="mainAllCourses">
         <% courses.forEach(course => { %>
-            <div class="coursecard" style="--bgimg: url('<%= course.imageUrl %>');">
+            <div class="coursecard" style="--bgimg: url('<%= course.imageUrl || '/assets/defaultcourse.png' %>');">
                 <div class="coursecard__contents">
                     <div class="coursecard__title">
                         <a href="/courses/<%= course.id%>" class="coursecard__link"><%= course.title %></a>
@@ -25,9 +25,13 @@
                             <% }) %>                            
                         </div>
                         <div class="coursecard__footer">
-                            <div class="coursecard__price">
-                                $<%= course.price %>
-                            </div>
+                            <% if (course.price !== 0) { %>
+                                <div class="coursecard__price">
+                                    $<%= Math.round(course.price*100)/100 %>
+                                </div>
+                            <% } else { %>
+                                <div class="coursecard__pricefree">Free!</div>
+                            <% } %>
                             <div class="coursecard__starrating">
                                 <img src="./assets/star-filled.svg" />
                                 <img src="./assets/star-filled.svg" />
@@ -35,7 +39,8 @@
                                 <img src="./assets/star-filled.svg" />
                                 <img src="./assets/star-empty.svg" />
                             </div>
-                            <div class="coursecard__votecount">(37 votes)</div>
+                            <div class="coursecard__votecount">(<%= course.reviewCount %>
+                                <% if (course.reviewCount && course.reviewCount === 1) { %> vote<% } else { %> votes<% } %>)</div>
                         </div>
 
                     </div>

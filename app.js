@@ -45,7 +45,9 @@ const courseSchema = new mongoose.Schema({
 	courseUrl: String,
 	price: Number,
 	isFree: Boolean,
-	tags: [String]
+	tags: [String],
+	reviewCount: Number,
+	ratingTotal: Number
 });
 
 const Course = mongoose.model("Course", courseSchema);
@@ -85,9 +87,9 @@ app.get("/courses", (req, res) => {
 // Create - Route to handle info from form and add a new course to DB
 app.post("/courses", (req, res) => {
 // 	Get fields from form and save in newReview variable
-	const {title, author, description, authorUrl, reviewTitle, reviewDetails, price, isFree, courseUrl, imageUrl, tags} = req.body;
+	const {title, author, description, authorUrl, price, isFree, courseUrl, imageUrl, tags} = req.body;
 // 	Save as new var object
-	const newCourse = {title, author, description, authorUrl, reviewTitle, reviewDetails, price, isFree, courseUrl, imageUrl, tags};
+	const newCourse = {title, author, description, authorUrl, price, isFree, courseUrl, imageUrl, tags, reviewCount: 0, ratingTotal: 0};
 // 	Add to data base
 	Course.create(newCourse, (err, newlyCreated) => {
 		if(err) {
@@ -152,6 +154,16 @@ app.post("/newReview", (req, res) => {
 			console.log('An error occurred: ', err);
 		} else {
 			console.log('created a new review: ', rev);
+
+			// Update review count and avg rating for the course
+			let course = Course.findOne({_id: newReview.courseId});
+
+			Course.findOneAndUpdate(course, {$inc: {reviewCount: 1, ratingTotal: newReview.rating}}, (err, updatedCourse) => {
+				if (err) {
+					console.log('error updating the course: ', err);
+				}
+			})
+
 			res.redirect("/courses/" + rev.courseId);
 		}
 	})
