@@ -44,7 +44,6 @@ const courseSchema = new mongoose.Schema({
 	authorUrl: String,
 	courseUrl: String,
 	price: Number,
-	isFree: Boolean,
 	tags: [String],
 	reviewCount: Number,
 	ratingTotal: Number
@@ -93,9 +92,13 @@ app.get("/courses", (req, res) => {
 // Create - Route to handle info from form and add a new course to DB
 app.post("/courses", (req, res) => {
 // 	Get fields from form and save in newReview variable
-	const {title, author, description, authorUrl, price, isFree, courseUrl, imageUrl, tags} = req.body;
+	let {title, author, description, authorUrl, price, isFree, courseUrl, imageUrl, tags} = req.body;
+	if (isFree === "on") {
+		console.log('setting price to 0');
+		price = 0;
+	}
 // 	Save as new var object
-	const newCourse = {title, author, description, authorUrl, price, isFree, courseUrl, imageUrl, tags, reviewCount: 0, ratingTotal: 0};
+	const newCourse = {title, author, description, authorUrl, price, courseUrl, imageUrl, tags, reviewCount: 0, ratingTotal: 0};
 // 	Add to data base
 	Course.create(newCourse, (err, newlyCreated) => {
 		if(err) {
