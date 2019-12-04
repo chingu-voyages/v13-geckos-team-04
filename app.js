@@ -1,8 +1,11 @@
-const express    = require("express"),
-	  app        = express(),
-	  bodyParser = require("body-parser"),
-	  methodOverride = require("method-override"),
-	  mongoose   = require("mongoose"); 
+const express               = require("express"),
+	  app                   = express(),
+	  bodyParser            = require("body-parser"),
+	  methodOverride        = require("method-override"),
+	  mongoose              = require("mongoose"),
+	  passport              = require("passport"),
+	  LocalStratagy         = require("passport-local"),
+	  passportLocalMongoose = require("passport-local-mongoose");
 
 require('dotenv/config');
 	
@@ -68,6 +71,25 @@ const reviewSchema = new mongoose.Schema({
 });
 
 const Review = mongoose.model("Review", reviewSchema);
+
+const userSchema = new mongoose.Schema({
+	username: {
+		type: String,
+		unique: true,
+		required: true
+	},
+	email: {
+		type: String,
+		unique: true,
+		required: true
+	},
+	password: {
+		type: String,
+		required: true
+	}
+});
+
+const User = mongoose.model("User", userSchema);
 
 app.get("/", (req, res) => {
 	res.redirect("/courses");
