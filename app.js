@@ -104,9 +104,9 @@ const User = mongoose.model("User", UserSchema);
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-======================
-	ROUTES
-======================
+// ======================
+// 	ROUTES
+// ======================
 
 
 app.get("/", (req, res) => {
@@ -287,10 +287,16 @@ app.post("/search", (req, res) => {
 
 
 
-// Route for sign up page			  
+// Show sign up page			  
 app.get("/signup", (req, res) => {
 		res.render("signup");
 });				  
+// Handle sign up logic
+app.post("/signup", (req, res) => {
+	res.send("you signed up");
+})
+
+
 // Route for login page
 app.get("/login", (req, res) => {
 		res.render("login");
