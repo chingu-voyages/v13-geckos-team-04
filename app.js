@@ -37,6 +37,8 @@ app.use(require("express-session")({
 app.use(passport.initialize());
 app.use(passport.session());
 
+
+
 // Serve static files
 var path = require('path');
 app.use(express.static(path.join(__dirname, 'static')));
@@ -99,6 +101,12 @@ UserSchema.plugin(passportLocalMongoose);
 
 const User = mongoose.model("User", UserSchema);
 
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+======================
+	ROUTES
+======================
 
 
 app.get("/", (req, res) => {
