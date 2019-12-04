@@ -27,10 +27,15 @@ mongoose.connect(`mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@cluster0-70y
 	console.log("ERROR", err.message);
 });
 
-
 app.use(bodyParser.urlencoded({extended:true})); 
 app.set("view engine", "ejs");	
-
+app.use(require("express-session")({
+	secret: "Chingu is cool",
+	resave: false,
+	saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Serve static files
 var path = require('path');
@@ -72,7 +77,8 @@ const reviewSchema = new mongoose.Schema({
 
 const Review = mongoose.model("Review", reviewSchema);
 
-const userSchema = new mongoose.Schema({
+// USER Schema - 
+const UserSchema = new mongoose.Schema({
 	username: {
 		type: String,
 		unique: true,
@@ -89,7 +95,11 @@ const userSchema = new mongoose.Schema({
 	}
 });
 
-const User = mongoose.model("User", userSchema);
+UserSchema.plugin(passportLocalMongoose);
+
+const User = mongoose.model("User", UserSchema);
+
+
 
 app.get("/", (req, res) => {
 	res.redirect("/courses");
