@@ -52,12 +52,13 @@ const courseSchema = new mongoose.Schema({
 
 const Course = mongoose.model("Course", courseSchema);
 
-// Tech tags for new courses
+// Tag Schema - Tech tags for new courses
 const tagSchema = new mongoose.Schema({
 	title: String,
 });
 const Tag = mongoose.model("Tag", tagSchema);
 
+// Review Schema - Comments and ratings for courses
 const reviewSchema = new mongoose.Schema({
 	id: String,
 	courseId: String,
