@@ -110,15 +110,15 @@ app.post("/courses", (req, res) => {
 	});	
 });
 	
-	// New - Route to show form for new courses
+var tagList = [];
+Tag.find({}, null, {sort: 'title'}, (err, allTags) => {
+	tagList = allTags;
+});
+
+// New - Route to show form for new courses
 app.get("/courses/new", (req, res) => {
-	Tag.find({}, null, {sort: 'title'}, (err, allTags) => {
-		if (err) {
-			console.log(err);
-		} else {
-			res.render("newcourse",{tags: allTags});
-		}
-	});
+	let course = {title: "", author: "", description: "", authorUrl: "", price: "", courseUrl: "", imageUrl: "", tags: []};
+	res.render("newcourse",{tags: tagList, course: course, action: "/courses" });	
 });
 	
 // 	Show - Show specific course with additional details by using ID to grab it from the data base
@@ -159,7 +159,7 @@ app.get("/courses/:id/edit", (req, res) => {
 		if(err) {
 			res.render("error");
 		} else {
-			res.render("edit", {course: foundCourse});
+			res.render("newcourse",{tags: tagList, course: foundCourse, action: "/courses/"+foundCourse.id+"?_method=put" });
 		}
 	});
 });
@@ -186,22 +186,25 @@ app.post("/newReview", (req, res) => {
 			res.redirect("/courses/" + rev.courseId);
 		}
 	})
-
 });
 
 // Update Route - Take info from edit form and update DB data
 app.put("/courses/:id", (req, res) => {
-	Course.findByIdAndUpdate(req.params.id, req.body.course, (err, updatedCourse) => {
+	if (req.body.isFree === "on") {
+		console.log('setting price to 0');
+		req.body.price = 0;
+	}
+	Course.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, updatedCourse) => {
 		if(err) {
 			res.render("error");
 		} else {
+			console.log(updatedCourse)
 			res.redirect("/courses/" + req.params.id);
 		}
 	});
 });
 
 // Delete Route - Find course by ID and delete
-
 app.delete("/courses/:id", (req, res) => {
 	Course.findByIdAndRemove(req.params.id, (err, deletedCourse) => {
 		if(err) {
