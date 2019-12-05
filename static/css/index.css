@@ -55,8 +55,12 @@ body {
   .coursecard__title {
     color: var(--primary-color);
     font-weight: 700;
-    font-size: 2rem;
+    font-size: 1.8rem;
     margin-top: 0.3rem;
+  }
+
+  .coursecard__link {
+    text-decoration: none;
   }
   
   .coursecard__tags {
