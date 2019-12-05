@@ -4,10 +4,10 @@
 		<h2><% tags[1] %></h2>					
     	<main class="addCourseMain">
 			<form action="/courses" method="POST" name="addCourse" class="addCourseForm">
-				<input type="text" class="addCourseForm__textInput" name="title" placeholder="Course title:" />
-				<input type="text" class="addCourseForm__textInput" name="author" placeholder="Author:" />
+				<input type="text" class="addCourseForm__textInput" name="title" placeholder="Course title:" required />
+				<input type="text" class="addCourseForm__textInput" name="author" placeholder="Author:" required />
 				<input type="text" class="addCourseForm__textInput" name="authorUrl" placeholder="Author website (Optional):" />
-				<input type="text" class="addCourseForm__textInput" name="courseUrl" placeholder="Course website:" />
+				<input type="text" class="addCourseForm__textInput" name="courseUrl" placeholder="Course website:" required />
 				<input type="text" class="addCourseForm__textInput" name="imageUrl" placeholder="Image URL (Optional):" />
 				
 				<div class="spacer20"></div>
@@ -26,7 +26,7 @@
 
 				<textarea name="description" class="addCourseForm__textArea" placeholder="Tell us more about the course:"></textarea>
 				<div class="addCoursePriceLine">
-					<input type="number" class="addCourseForm__textInput addCourseForm__textInput--short" name="price" placeholder="Price:" step="0.01" />
+					<input type="number" class="addCourseForm__textInput addCourseForm__textInput--short" name="price" placeholder="Price:" step="0.01" min="0" max="99999.99" />
 					<input type="checkbox" class="addCourseForm__checkbox" name="isFree"><label for="isFree" class="addCourseForm__label">Free!</label>
 				</div>
 				
