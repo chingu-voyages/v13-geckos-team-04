@@ -1,0 +1,10 @@
+.about__title {
+  text-align: center;
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+}
+
+.about__paragraph {
+  margin: 2rem;
+  font-size: 1.3rem;
+}
