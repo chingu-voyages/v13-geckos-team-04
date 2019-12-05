@@ -162,7 +162,7 @@ app.get("/courses/:id/edit", (req, res) => {
 			var css = ["header", "footer", "global"];
 			res.render("error", {css: css});
 		} else {
-			var css = ["header", "footer", "global", "edit"];
+			var css = ["header", "footer", "global", "newcourse"];
 			res.render("edit", {course: foundCourse, css: css});
 		}
 	});
