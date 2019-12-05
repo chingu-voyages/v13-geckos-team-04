@@ -265,7 +265,7 @@ app.get("/login", (req, res) => {
 });	
 // Route for about page
 app.get("/about", (req, res) => {
-	var css = ["header", "footer", "global"];
+	var css = ["header", "footer", "global", "about"];
 	res.render("about", {css: css});
 });
 
