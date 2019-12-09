@@ -324,11 +324,23 @@ app.post("/signup", (req, res) => {
 });
 
 
-// Route for login page
+// Route to show login page
 app.get("/login", (req, res) => {
 	var css = ["header", "footer", "global"];
 	res.render("login", {css: css});
 });	
+
+// Route to handle logic from log in
+app.post("/login", passport.authenticate("local", 
+	{
+		successRedirect: "/courses",
+		failureRedirect: "/login"
+	}), (req, res) => {
+});
+
+
+
+
 // Route for about page
 app.get("/about", (req, res) => {
 	var css = ["header", "footer", "global", "about"];
