@@ -54,7 +54,6 @@ const courseSchema = new mongoose.Schema({
 	authorUrl: String,
 	courseUrl: String,
 	price: Number,
-	isFree: Boolean,
 	tags: [String],
 	reviewCount: Number,
 	ratingTotal: Number
@@ -123,7 +122,8 @@ app.get("/courses", (req, res) => {
 					course.rating = 0;
 				}
 			});
-			res.render("index",{courses:allCourses});
+			var css = ["header", "footer", "global", "index"];
+			res.render("index",{courses:allCourses, css: css});
 		}
 	});
 });		
@@ -131,9 +131,13 @@ app.get("/courses", (req, res) => {
 // Create - Route to handle info from form and add a new course to DB
 app.post("/courses", (req, res) => {
 // 	Get fields from form and save in newReview variable
-	const {title, author, description, authorUrl, price, isFree, courseUrl, imageUrl, tags} = req.body;
+	let {title, author, description, authorUrl, price, isFree, courseUrl, imageUrl, tags} = req.body;
+	if (isFree === "on") {
+		console.log('setting price to 0');
+		price = 0;
+	}
 // 	Save as new var object
-	const newCourse = {title, author, description, authorUrl, price, isFree, courseUrl, imageUrl, tags, reviewCount: 0, ratingTotal: 0};
+	const newCourse = {title, author, description, authorUrl, price, courseUrl, imageUrl, tags, reviewCount: 0, ratingTotal: 0};
 // 	Add to data base
 	Course.create(newCourse, (err, newlyCreated) => {
 		if(err) {
@@ -145,15 +149,16 @@ app.post("/courses", (req, res) => {
 	});	
 });
 	
-	// New - Route to show form for new courses
+var tagList = [];
+Tag.find({}, null, {sort: 'title'}, (err, allTags) => {
+	tagList = allTags;
+});
+
+// New - Route to show form for new courses
 app.get("/courses/new", (req, res) => {
-	Tag.find({}, null, {sort: 'title'}, (err, allTags) => {
-		if (err) {
-			console.log(err);
-		} else {
-			res.render("newcourse",{tags: allTags});
-		}
-	});
+	var css = ["header", "footer", "global", "newcourse"];
+	let course = {title: "", author: "", description: "", authorUrl: "", price: "", courseUrl: "", imageUrl: "", tags: []};
+	res.render("newcourse",{tags: tagList, course: course, action: "/courses", css: css });	
 });
 	
 // 	Show - Show specific course with additional details by using ID to grab it from the data base
@@ -180,8 +185,8 @@ app.get("/courses/:id", (req, res) => {
 					foundReviews.forEach(review => {
 						ratingsByStars[review.rating]++; 
 					});
-										
-					res.render("show", {foundCourse, foundReviews, ratingsByStars});
+					var css = ["header", "footer", "global", "show"];
+					res.render("show", {foundCourse, foundReviews, ratingsByStars, css});
 				}
 			});
 		}
@@ -192,9 +197,11 @@ app.get("/courses/:id", (req, res) => {
 app.get("/courses/:id/edit", (req, res) => {
 	Course.findById(req.params.id, (err, foundCourse) => {
 		if(err) {
-			res.render("error");
+			var css = ["header", "footer", "global"];
+			res.render("error", {css: css});
 		} else {
-			res.render("edit", {course: foundCourse});
+ 			var css = ["header", "footer", "global", "newcourse"];
+			res.render("newcourse",{tags: tagList, course: foundCourse, action: "/courses/"+foundCourse.id+"?_method=put", css: css });
 		}
 	});
 });
@@ -221,26 +228,31 @@ app.post("/newReview", (req, res) => {
 			res.redirect("/courses/" + rev.courseId);
 		}
 	})
-
 });
 
 // Update Route - Take info from edit form and update DB data
 app.put("/courses/:id", (req, res) => {
-	Course.findByIdAndUpdate(req.params.id, req.body.course, (err, updatedCourse) => {
+	if (req.body.isFree === "on") {
+		console.log('setting price to 0');
+		req.body.price = 0;
+	}
+	Course.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, updatedCourse) => {
 		if(err) {
-			res.render("error");
+			var css = ["header", "footer", "global"];
+			res.render("error", {css: css});
 		} else {
+			console.log(updatedCourse)
 			res.redirect("/courses/" + req.params.id);
 		}
 	});
 });
 
 // Delete Route - Find course by ID and delete
-
 app.delete("/courses/:id", (req, res) => {
 	Course.findByIdAndRemove(req.params.id, (err, deletedCourse) => {
 		if(err) {
-			res.render("error");
+			var css = ["header", "footer", "global"];
+			res.render("error", {css: css});
 		} else {
 			res.redirect("/courses")
 		}
@@ -249,6 +261,8 @@ app.delete("/courses/:id", (req, res) => {
 
 
 app.post("/search", (req, res) => {
+	var css = ["header", "footer", "global", "index"];
+
 	if (req.body.searchInField == "tags") {
 		Course.find( {tags: req.body.searchText}, (err, courses) => {
 			if (err) {
@@ -260,7 +274,7 @@ app.post("/search", (req, res) => {
 						course.rating = 0;
 					}
 				});
-				res.render("index",{courses: courses, searchFor: "Topic: "+req.body.searchText});
+				res.render("index",{courses: courses, searchFor: "Topic: "+req.body.searchText, css: css});
 			}
 		} );
 	} else {
@@ -274,19 +288,16 @@ app.post("/search", (req, res) => {
 						course.rating = 0;
 					}
 				});
-				res.render("index",{courses: courses, searchFor: req.body.searchText});
+				res.render("index",{courses: courses, searchFor: req.body.searchText, css: css});
 			}
 		});
 	}
 });
-		
-
-
-
 
 // Show sign up page			  
 app.get("/signup", (req, res) => {
-		res.render("signup");
+	var css = ["header", "footer", "global"];
+	res.render("signup", {css: css});
 });				  
 // Handle sign up logic
 app.post("/signup", (req, res) => {
@@ -307,15 +318,18 @@ app.post("/signup", (req, res) => {
 
 // Route for login page
 app.get("/login", (req, res) => {
-		res.render("login");
+	var css = ["header", "footer", "global"];
+	res.render("login", {css: css});
 });	
 // Route for about page
 app.get("/about", (req, res) => {
-		res.render("about");
+	var css = ["header", "footer", "global", "about"];
+	res.render("about", {css: css});
 });
 
 app.get("/error", (req, res) => {
-		res.render("error");
+	var css = ["header", "footer", "global"];
+	res.render("error", {css: css});
 });
 
 

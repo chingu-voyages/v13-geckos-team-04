@@ -14,9 +14,10 @@
 <main class="mainAllCourses">
         <% courses.forEach(course => { %>
             <div class="coursecard" style="--bgimg: url('<%= course.imageUrl || '/assets/defaultcourse.png' %>');">
+                <a href="/courses/<%= course.id%>" class="coursecard__link">
                 <div class="coursecard__contents">
                     <div class="coursecard__title">
-                        <a href="/courses/<%= course.id%>" class="coursecard__link"><%= course.title %></a>
+                        <%= course.title %>
 					</div>
                     <div class="coursecard__tags-and-footer">
                         <div class="coursecard__tags">
@@ -45,6 +46,7 @@
 
                     </div>
                 </div>
+            </a>
             </div>
 					
 		<% }); %>

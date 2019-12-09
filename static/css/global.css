@@ -13,3 +13,13 @@
 	text-align: center;
 	margin: 30px 0;
 }
+
+html {
+	position: relative;
+	min-height: 100vh;
+  }
+  
+  body {
+	margin: 0 0 49px;
+  }
+  

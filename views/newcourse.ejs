@@ -1,14 +1,18 @@
 <% include partials/header %>
-
+<% if (course.title == "") { %>
 		<h1 class="h1">Add a New Course</h1>
+<% } else { %>
+		<h1 class="h1">Update: <%= course.title %></h1>
+<% } %>
+
 		<h2><% tags[1] %></h2>					
     	<main class="addCourseMain">
-			<form action="/courses" method="POST" name="addCourse" class="addCourseForm">
-				<input type="text" class="addCourseForm__textInput" name="title" placeholder="Course title:" />
-				<input type="text" class="addCourseForm__textInput" name="author" placeholder="Author:" />
-				<input type="text" class="addCourseForm__textInput" name="authorUrl" placeholder="Author website (Optional):" />
-				<input type="text" class="addCourseForm__textInput" name="courseUrl" placeholder="Course website:" />
-				<input type="text" class="addCourseForm__textInput" name="imageUrl" placeholder="Image URL (Optional):" />
+			<form action="<%= action %>" method="post" name="addCourse" class="addCourseForm">
+				<input type="text" class="addCourseForm__textInput" name="title" placeholder="Course title:" value="<%= course.title %>" required />
+				<input type="text" class="addCourseForm__textInput" name="author" placeholder="Author:" value="<%= course.author %>" required />
+				<input type="text" class="addCourseForm__textInput" name="authorUrl" placeholder="Author website (Optional):" value="<%= course.authorUrl %>"/>
+				<input type="text" class="addCourseForm__textInput" name="courseUrl" placeholder="Course website:" value="<%= course.courseUrl %>" required />
+				<input type="text" class="addCourseForm__textInput" name="imageUrl" placeholder="Image URL (Optional):" value="<%= course.imageUrl %>"/>
 				
 				<div class="spacer20"></div>
 				
@@ -16,7 +20,7 @@
 				<ul class="tagList">
 					<% tags.forEach ((tag) => { %>
 					<li class="tagList__item">
-						<input type="checkbox" value="<%= tag.title %>" name="tags" id="tag.title" />
+						<input type="checkbox" value="<%= tag.title %>" name="tags" id="tag.title" <% if (course.tags.includes(tag.title)) { %> checked <% } %>} />
 						<label for="<%= tag.title %>"><%= tag.title %> </label>
 					</li>
 					<% }); %>
@@ -24,14 +28,17 @@
 				
 				<div class="spacer20"></div>
 
-				<textarea name="description" class="addCourseForm__textArea" placeholder="Tell us more about the course:"></textarea>
+				<textarea name="description" class="addCourseForm__textArea" placeholder="Tell us more about the course:" ><%= course.description %></textarea>
 				<div class="addCoursePriceLine">
-					<input type="number" class="addCourseForm__textInput addCourseForm__textInput--short" name="price" placeholder="Price:" step="0.01" />
-					<input type="checkbox" class="addCourseForm__checkbox" name="isFree"><label for="isFree" class="addCourseForm__label">Free!</label>
+					<input type="number" class="addCourseForm__textInput addCourseForm__textInput--short" name="price" placeholder="Price:" step="0.01" min="0" max="99999.99" value="<%= course.price %>"/>
+					<input type="checkbox" class="addCourseForm__checkbox" name="isFree" <% if (course.price === 0) { %> checked <% } %> />
+					<label for="isFree" class="addCourseForm__label">Free!</label>
 				</div>
 				
 				<div class="spacer20"></div>    
 				<input class="addCourseForm__submit" type="submit" />
+				<div class="spacer20"></div>    
+
 			</form>
 		</main>
 			
