@@ -338,7 +338,11 @@ app.post("/login", passport.authenticate("local",
 	}), (req, res) => {
 });
 
-
+// Route to Log Out 
+app.get("/logout", (req, res) => {
+	req.logout();
+	redirect("courses");
+});
 
 
 // Route for about page
