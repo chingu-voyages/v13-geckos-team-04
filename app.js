@@ -91,10 +91,7 @@ const UserSchema = new mongoose.Schema({
 		unique: true,
 		required: true
 	},
-	password: {
-		type: String,
-		required: true
-	}
+	password: String
 });
 
 UserSchema.plugin(passportLocalMongoose);
@@ -293,17 +290,16 @@ app.get("/signup", (req, res) => {
 });				  
 // Handle sign up logic
 app.post("/signup", (req, res) => {
-	User.register(new User({
-		username: req.body.username,
-		email: req.body.email
-		}), req.body.password, (err, user) => {
+	let newUser = {username: req.body.username, email: req.body.email}
+	User.register(new User(newUser), req.body.password, (err, user) => {
 		if(err) {
 			console.log(err);
-			res.render("signup");
+			return res.render("signup");
 		} else {
 			passport.authenticate("local")(req, res, () => {
-				res.redirect("index");
-			}
+				console.log(user);
+				res.redirect("/courses");
+			});
 		}
 	});
 });
