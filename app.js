@@ -29,6 +29,8 @@ mongoose.connect(`mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@cluster0-70y
 
 app.use(bodyParser.urlencoded({extended:true})); 
 app.set("view engine", "ejs");	
+
+// Passport Configuration
 app.use(require("express-session")({
 	secret: "Chingu is cool",
 	resave: false,
@@ -39,7 +41,8 @@ app.use(passport.session());
 
 
 
-// Serve static files
+
+// Serve static 
 var path = require('path');
 app.use(express.static(path.join(__dirname, 'static')));
 // Allow PUT & DELETE methods by overriding POST method
@@ -97,6 +100,7 @@ UserSchema.plugin(passportLocalMongoose);
 
 const User = mongoose.model("User", UserSchema);
 
+passport.use(new LocalStratagy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
@@ -294,6 +298,10 @@ app.post("/search", (req, res) => {
 	}
 });
 
+	// ======
+	// // Auth Routes
+	// =======
+
 // Show sign up page			  
 app.get("/signup", (req, res) => {
 	var css = ["header", "footer", "global"];
@@ -302,7 +310,7 @@ app.get("/signup", (req, res) => {
 // Handle sign up logic
 app.post("/signup", (req, res) => {
 	let newUser = {username: req.body.username, email: req.body.email}
-	User.register(new User(newUser), req.body.password, (err, user) => {
+	User.register(newUser, req.body.password, (err, user) => {
 		if(err) {
 			console.log(err);
 			return res.render("signup");
