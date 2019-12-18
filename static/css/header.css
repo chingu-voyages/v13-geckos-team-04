@@ -45,3 +45,12 @@
 	display: flex;
 	margin-left: 1em;
 }
+
+.header__nav {
+	font-size: 1rem;
+	line-height: 2rem;
+}
+
+a {
+	color: #fff;
+}
