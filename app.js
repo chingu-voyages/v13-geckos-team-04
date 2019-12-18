@@ -127,7 +127,7 @@ app.get("/courses", (req, res) => {
 				}
 			});
 			var css = ["header", "footer", "global", "index"];
-			res.render("index",{courses:allCourses, css: css});
+			res.render("index",{courses:allCourses, css: css, user: req.user});
 		}
 	});
 });		
@@ -162,13 +162,14 @@ Tag.find({}, null, {sort: 'title'}, (err, allTags) => {
 app.get("/courses/new", (req, res) => {
 	var css = ["header", "footer", "global", "newcourse"];
 	let course = {title: "", author: "", description: "", authorUrl: "", price: "", courseUrl: "", imageUrl: "", tags: []};
-	res.render("newcourse",{tags: tagList, course: course, action: "/courses", css: css });	
+	res.render("newcourse",{tags: tagList, course: course, action: "/courses", css: css, user: req.user });	
 });
 	
 // 	Show - Show specific course with additional details by using ID to grab it from the data base
 
 app.get("/courses/:id", (req, res) => {
 	var id = req.params.id;
+	var username = typeof (req.user === "undefined") ? "" : req.user.username; 
 	Course.findById(id, (err, foundCourse) => {
 		if (err) {
 			console.log(err);
@@ -190,7 +191,7 @@ app.get("/courses/:id", (req, res) => {
 						ratingsByStars[review.rating]++; 
 					});
 					var css = ["header", "footer", "global", "show"];
-					res.render("show", {foundCourse, foundReviews, ratingsByStars, css});
+					res.render("show", {foundCourse, foundReviews, ratingsByStars, css, user: req.user});
 				}
 			});
 		}
@@ -202,10 +203,10 @@ app.get("/courses/:id/edit", (req, res) => {
 	Course.findById(req.params.id, (err, foundCourse) => {
 		if(err) {
 			var css = ["header", "footer", "global"];
-			res.render("error", {css: css});
+			res.render("error", {css: css, user: req.user});
 		} else {
  			var css = ["header", "footer", "global", "newcourse"];
-			res.render("newcourse",{tags: tagList, course: foundCourse, action: "/courses/"+foundCourse.id+"?_method=put", css: css });
+			res.render("newcourse",{tags: tagList, course: foundCourse, action: "/courses/"+foundCourse.id+"?_method=put", css: css, user: req.user });
 		}
 	});
 });
@@ -243,7 +244,7 @@ app.put("/courses/:id", (req, res) => {
 	Course.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, updatedCourse) => {
 		if(err) {
 			var css = ["header", "footer", "global"];
-			res.render("error", {css: css});
+			res.render("error", {css: css, user: req.user});
 		} else {
 			console.log(updatedCourse)
 			res.redirect("/courses/" + req.params.id);
@@ -256,7 +257,7 @@ app.delete("/courses/:id", (req, res) => {
 	Course.findByIdAndRemove(req.params.id, (err, deletedCourse) => {
 		if(err) {
 			var css = ["header", "footer", "global"];
-			res.render("error", {css: css});
+			res.render("error", {css: css, user: req.user});
 		} else {
 			res.redirect("/courses")
 		}
@@ -278,7 +279,7 @@ app.post("/search", (req, res) => {
 						course.rating = 0;
 					}
 				});
-				res.render("index",{courses: courses, searchFor: "Topic: "+req.body.searchText, css: css});
+				res.render("index",{courses: courses, searchFor: "Topic: "+req.body.searchText, css: css, user: req.user});
 			}
 		} );
 	} else {
@@ -292,7 +293,7 @@ app.post("/search", (req, res) => {
 						course.rating = 0;
 					}
 				});
-				res.render("index",{courses: courses, searchFor: req.body.searchText, css: css});
+				res.render("index",{courses: courses, searchFor: req.body.searchText, css: css, user: req.user});
 			}
 		});
 	}
@@ -305,7 +306,7 @@ app.post("/search", (req, res) => {
 // Show sign up page			  
 app.get("/signup", (req, res) => {
 	var css = ["header", "footer", "global"];
-	res.render("signup", {css: css});
+	res.render("signup", {css: css, user: req.user});
 });				  
 // Handle sign up logic
 app.post("/signup", (req, res) => {
@@ -313,7 +314,8 @@ app.post("/signup", (req, res) => {
 	User.register(newUser, req.body.password, (err, user) => {
 		if(err) {
 			console.log(err);
-			return res.render("signup");
+			var css = ["header", "footer", "global"];
+			return res.render("signup", {css: css, user: req.user});
 		} else {
 			passport.authenticate("local")(req, res, () => {
 				console.log(user);
@@ -327,7 +329,7 @@ app.post("/signup", (req, res) => {
 // Route to show login page
 app.get("/login", (req, res) => {
 	var css = ["header", "footer", "global"];
-	res.render("login", {css: css});
+	res.render("login", {css: css, user: req.user});
 });	
 
 // Route to handle logic from log in
@@ -348,12 +350,12 @@ app.get("/logout", (req, res) => {
 // Route for about page
 app.get("/about", (req, res) => {
 	var css = ["header", "footer", "global", "about"];
-	res.render("about", {css: css});
+	res.render("about", {css: css, user: req.user});
 });
 
 app.get("/error", (req, res) => {
 	var css = ["header", "footer", "global"];
-	res.render("error", {css: css});
+	res.render("error", {css: css, user: req.user});
 });
 
 
