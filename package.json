@@ -4,8 +4,8 @@
   "description": "Add-project-description-here | Voyage-13 | https://chingu.io/ | Twitter: https://twitter.com/ChinguCollabs",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1", 
-	"start": "node app.js"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
@@ -26,9 +26,10 @@
     "mongoose": "^5.7.11",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
-    "passport-local-mongoose": "^5.0.1"
+    "passport-local-mongoose": "^5.0.1",
+    "dotenv": "^8.2.0"
+
   },
   "devDependencies": {
-    "dotenv": "^8.2.0"
   }
 }
