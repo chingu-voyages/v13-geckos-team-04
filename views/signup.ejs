@@ -3,11 +3,11 @@
     <p>
         This will be the Sign Up Page
     </p>
-    <form>
+    <form action="/signup" method="POST">
 
         <!-- Sign up form. To be replaced with react/frontend stuff   -->
         <div>
-            <label for="username">Name: </label>
+            <label for="username">Username: </label>
             <input id="username" type="text" name="username">
         </div>
         <div>
@@ -18,6 +18,9 @@
             <label for="password">Password: </label>
             <input id="password" type="password" name="password">
         </div>
+		<button>
+			SIGN UP!!!
+		</button>
     </form>
 
     <% include partials/footer %>

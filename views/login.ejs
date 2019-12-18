@@ -2,19 +2,22 @@
     
    		<p>This will be the Login Page</p>
 		
-		<form>
+		<form action="/login" method="POST">
 	
 
 <!-- Sign up form. To be replaced with react/frontend stuff   -->
 			<div>
-			  <label for="email">Email: </label>
-			  <input id="email" type="email" name="email">
+			  <label for="username">Username: </label>
+			  <input type="text" name="username" placeholder="username">
 			</div>
 
 			<div>
 			  <label for="password">Password: </label>
-			  <input id="password" type="password" name="password">
+			  <input type="password" name="password" placeholder="password" >
 			</div>
+			<button>
+				Login!
+			</button>
 		</form>
 		
 	<% include partials/footer %>

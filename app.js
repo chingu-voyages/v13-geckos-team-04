@@ -1,8 +1,11 @@
-const express    = require("express"),
-	  app        = express(),
-	  bodyParser = require("body-parser"),
-	  methodOverride = require("method-override"),
-	  mongoose   = require("mongoose"); 
+const express               = require("express"),
+	  app                   = express(),
+	  bodyParser            = require("body-parser"),
+	  methodOverride        = require("method-override"),
+	  mongoose              = require("mongoose"),
+	  passport              = require("passport"),
+	  LocalStratagy         = require("passport-local"),
+	  passportLocalMongoose = require("passport-local-mongoose");
 
 require('dotenv/config');
 	
@@ -24,12 +27,22 @@ mongoose.connect(`mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@cluster0-70y
 	console.log("ERROR", err.message);
 });
 
-
 app.use(bodyParser.urlencoded({extended:true})); 
 app.set("view engine", "ejs");	
 
+// Passport Configuration
+app.use(require("express-session")({
+	secret: "Chingu is cool",
+	resave: false,
+	saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 
-// Serve static files
+
+
+
+// Serve static 
 var path = require('path');
 app.use(express.static(path.join(__dirname, 'static')));
 // Allow PUT & DELETE methods by overriding POST method
@@ -51,12 +64,13 @@ const courseSchema = new mongoose.Schema({
 
 const Course = mongoose.model("Course", courseSchema);
 
-// Tech tags for new courses
+// Tag Schema - Tech tags for new courses
 const tagSchema = new mongoose.Schema({
 	title: String,
 });
 const Tag = mongoose.model("Tag", tagSchema);
 
+// Review Schema - Comments and ratings for courses
 const reviewSchema = new mongoose.Schema({
 	id: String,
 	courseId: String,
@@ -66,6 +80,34 @@ const reviewSchema = new mongoose.Schema({
 });
 
 const Review = mongoose.model("Review", reviewSchema);
+
+// USER Schema - 
+const UserSchema = new mongoose.Schema({
+	username: {
+		type: String,
+		unique: true,
+		required: true
+	},
+	email: {
+		type: String,
+		unique: true,
+		required: true
+	},
+	password: String
+});
+
+UserSchema.plugin(passportLocalMongoose);
+
+const User = mongoose.model("User", UserSchema);
+
+passport.use(new LocalStratagy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+// ======================
+// 	ROUTES
+// ======================
+
 
 app.get("/", (req, res) => {
 	res.redirect("/courses");
@@ -256,16 +298,53 @@ app.post("/search", (req, res) => {
 	}
 });
 
-// Route for sign up page			  
+	// ======
+	// // Auth Routes
+	// =======
+
+// Show sign up page			  
 app.get("/signup", (req, res) => {
 	var css = ["header", "footer", "global"];
 	res.render("signup", {css: css});
 });				  
-// Route for login page
+// Handle sign up logic
+app.post("/signup", (req, res) => {
+	let newUser = {username: req.body.username, email: req.body.email}
+	User.register(newUser, req.body.password, (err, user) => {
+		if(err) {
+			console.log(err);
+			return res.render("signup");
+		} else {
+			passport.authenticate("local")(req, res, () => {
+				console.log(user);
+				res.redirect("/courses");
+			});
+		}
+	});
+});
+
+
+// Route to show login page
 app.get("/login", (req, res) => {
 	var css = ["header", "footer", "global"];
 	res.render("login", {css: css});
 });	
+
+// Route to handle logic from log in
+app.post("/login", passport.authenticate("local", 
+	{
+		successRedirect: "/courses",
+		failureRedirect: "/login"
+	}), (req, res) => {
+});
+
+// Route to Log Out 
+app.get("/logout", (req, res) => {
+	req.logout();
+	res.redirect("courses");
+});
+
+
 // Route for about page
 app.get("/about", (req, res) => {
 	var css = ["header", "footer", "global", "about"];
