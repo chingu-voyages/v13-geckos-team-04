@@ -51,6 +51,7 @@
 	line-height: 2rem;
 }
 
-a {
+.header__link--small, .header__text--small {
 	color: #fff;
 }
+
