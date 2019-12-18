@@ -1,0 +1,12 @@
+<footer class="footer">
+	<a href="/courses" class="footer__link">CodeReview Homepage</a>&nbsp;|&nbsp;
+	<a href="/about" class="footer__link">About Us</a>&nbsp;|&nbsp;
+	<% if (typeof(user) === "undefined") { %>
+	<a href="/signup" class="footer__link">Sign Up</a>&nbsp;|&nbsp; 
+	<a href="/login" class="footer__link">Login</a>&nbsp;|&nbsp; 
+	<% } %>
+	<a href="/courses/new" class="footer__link">Add a new course</a>	
+</footer>
+
+	</body>
+</html>

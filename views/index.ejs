@@ -1,0 +1,56 @@
+<% include partials/header %>
+
+<% if (typeof (searchFor) != "undefined" && searchFor != "") { %>
+    <h1 class="h1">Search Results For: <%= searchFor %> </h1>
+
+    <% if (courses.length == 0) {%>
+        <div class="noResults">
+            <img src="assets/noResults.gif" />
+        </div>
+    <% } %>
+
+<% } %>
+		
+<main class="mainAllCourses">
+        <% courses.forEach(course => { %>
+            <div class="coursecard" style="--bgimg: url('<%= course.imageUrl || '/assets/defaultcourse.png' %>');">
+                <a href="/courses/<%= course.id%>" class="coursecard__link">
+                <div class="coursecard__contents">
+                    <div class="coursecard__title">
+                        <%= course.title %>
+					</div>
+                    <div class="coursecard__tags-and-footer">
+                        <div class="coursecard__tags">
+                            <% course.tags.forEach(tag => { %>
+                                <div class="coursecard__tag"><%= tag %></div>                            
+                            <% }) %>                            
+                        </div>
+                        <div class="coursecard__footer">
+                            <% if (course.price !== 0) { %>
+                                <div class="coursecard__price">
+                                    $<%= Math.round(course.price*100)/100 %>
+                                </div>
+                            <% } else { %>
+                                <div class="coursecard__pricefree">Free!</div>
+                            <% } %>
+                            <div class="coursecard__starrating">
+                                <div class="coursecard__starrating__starsWrapper">
+                                    <div class="coursecard__starrating__star" style="width:<%= 24 * course.rating %>px;"></div>
+                                </div>
+                                &nbsp;<%= course.rating %>
+                            </div>
+                            
+                            <div class="coursecard__votecount">(<%= course.reviewCount %>
+                                <% if (course.reviewCount && course.reviewCount === 1) { %> vote<% } else { %> votes<% } %>)</div>
+                        </div>
+
+                    </div>
+                </div>
+            </a>
+            </div>
+					
+		<% }); %>
+	
+</main>
+		
+<% include partials/footer %>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Code Review</title>
+  <% css.forEach(cssFile => { %>
+    <link rel="stylesheet" type="text/css" href="/css/<%= cssFile %>.css" />
+  <% }) %>
+  
+  <link href="https://fonts.googleapis.com/css?family=Bitter" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <header class="header">
+    <a href="/courses" class="header__link">Code Review &lt/&gt</a>
+    <nav class="header__nav">
+      <form action="/search" method="POST" name="searchForm" class="searchForm">
+        <input type="text" class="searchForm__text" name="searchText" placeholder="Enter Search Term..." />
+        <input type="hidden" name="searchInField" />
+        <input type="submit" class="searchForm__submit" value="Search" />
+      </form>
+      <a href="" class="profileBtn" alt="User Profile" title="User Profile">
+        <img src="/assets/user-profile.svg">
+      </a>
+    <% if (typeof(user) === "undefined") { %>
+      <a href="/signup" class="header__link--small">Sign up </a>
+      &nbsp;|&nbsp;
+      <a href="/login" class="header__link--small">Login </a>   
+    <% } else { %>
+      <span class="header__text--small">Hi, <%= user.username %>!&nbsp;|&nbsp;</span> 
+      <a href="/logout" class="header__link--small">Logout </a>
+    <% } %>		
+    </nav>
+  </header>

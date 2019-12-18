@@ -1,0 +1,104 @@
+<% include partials/header %>
+<script type="text/javascript" src="/js/show.js"></script>
+
+<h1 class="h1"><%= foundCourse.title %></h1>
+<div class="showCourse__starrating">
+  <div class="showCourse__starrating__starsWrapper">
+      <div class="showCourse__starrating__star" style="width:<%= 24 * foundCourse.rating %>px;"></div>
+  </div>&nbsp;
+  <div class="showCourse__starrating__text">
+    <%= foundCourse.rating %>
+    (<%= foundCourse.reviewCount %> <% if (foundCourse.reviewCount && foundCourse.reviewCount === 1) { %>vote<% } else { %>votes<% } %>)
+  </div>
+</div>
+
+
+<h3>By: <%= foundCourse.author %></h3>
+<div>
+  <%= foundCourse.description %>
+</div>
+
+<div class="showCourse__tagList">
+    <% foundCourse.tags.forEach(tag => { %> 
+      <div class="showCourse__tag" name="searchText" value="<%= tag %>" onclick="searchByTag('<%= tag %>');"><%= tag %></div>
+    <% }); %>
+</div>
+
+<div>
+<% if (foundCourse.price === 0) { %>
+    Free!
+<% } else { %>
+    $<%= foundCourse.price %>
+<% } %>
+</div>
+
+<div>Check it out <b>here</b>: <a href="<%= foundCourse.courseUrl %>" target="_blank"><%= foundCourse.courseUrl %></a></div>
+
+<img src="<%= foundCourse.imageUrl %>" /> 
+<hr class="hr"/> 
+
+<h2>User Reviews</h2>
+<Button class="newReview__button" onclick="showNewReview();">Add a review</Button>
+
+<% for (i=ratingsByStars.length-1; i>0; i--) { %>
+  <div class="totalvotes">
+    <div class="totalvotes__starsWrapper">
+        <div class="totalvotes__stars totalvotes__stars--<%= i %>star"></div>
+    </div>
+    <progress max="100" value="<%= foundCourse.reviewCount == 0 ? 0 : Math.floor(ratingsByStars[i] * 100 / foundCourse.reviewCount * 100) / 100 %>">  </progress>
+    <span><%= foundCourse.reviewCount == 0 ? 0 : Math.floor(ratingsByStars[i] * 100 / foundCourse.reviewCount * 100) / 100 %>%</span>
+  </div>  
+<% }; %>
+
+<% foundReviews.forEach(review => { %>
+
+  <div class="review">
+    <div class="review__title"><%= review.reviewTitle %></div>
+    <div class="review__rating">
+          <div class="review__starrating__starsWrapper">
+              <div class="review__starrating__filled" style="width:<%= 24 * review.rating %>px;"></div>
+          </div>
+    </div>
+    <div class="review__details"><%= review.reviewDetails %></div>
+  </div>
+
+<% }) %>
+
+<a href="/courses/<%= foundCourse._id %>/edit">Click here to edit the course</a>
+<form action="/courses/<%= foundCourse._id %>?_method=DELETE" method="POST">
+	<button>
+		DELETE COURSE!
+	</button>
+</form>
+
+
+<div class="newReview" id="newReview">
+  <div class="newReview__background"></div>
+  <div class="newReview__container">
+    <div class="newReview__header">
+      <h3 class="h3 newReview__h3">New Review For: <%= foundCourse.title %></h3>
+      <img src="/assets/closeBtn.png" class="newReview__img" onclick="hideNewReview();" title="Close" alt="Close">
+    </div>
+    <form action="/newReview" method="post" class="newReviewForm" name="newReviewForm" onsubmit="return (validateNewReview());">
+      <input type="hidden" name="courseId" value="<%= foundCourse.id %>" />
+      <div class="newReviewForm__row">
+        <div class="newReviewForm__text">Your Rating:&nbsp;&nbsp;</div>
+        <div>
+          <div class="starsReview starsReview__1" title="Waste of time!" onclick="selectStar(1);"></div>
+          <div class="starsReview starsReview__2" title="Not good" onclick="selectStar(2);"></div>
+          <div class="starsReview starsReview__3" title="It's OK" onclick="selectStar(3);"></div>
+          <div class="starsReview starsReview__4" title="Good!" onclick="selectStar(4);"></div>
+          <div class="starsReview starsReview__5" title="Perfect course!" onclick="selectStar(5);"></div>
+          <input type="hidden" name="rating" class="newReview__rating" value="0"/>
+        </div>
+      </div>
+    
+      <input type="text" class="newReviewForm__input" name="reviewTitle" placeholder="Review title (optional):" />
+      <textarea class="newReviewForm__textarea" name="reviewDetails" maxlength="400" placeholder="Details (optional):"></textarea>
+      <div class="newReviewForm__error"></div>
+      <input type="submit" class="newReviewForm__submit" />
+    </form>
+  </div>
+</div>
+		 
+<% include partials/footer %>    

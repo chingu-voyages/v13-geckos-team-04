@@ -45,3 +45,13 @@
 	display: flex;
 	margin-left: 1em;
 }
+
+.header__nav {
+	font-size: 1rem;
+	line-height: 2rem;
+}
+
+.header__link--small, .header__text--small {
+	color: #fff;
+}
+

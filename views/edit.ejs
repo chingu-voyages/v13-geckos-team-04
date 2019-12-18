@@ -1,0 +1,19 @@
+<% include partials/header %>
+
+  <h1>
+	  THIS WILL HAVE THE EDIT COURSE FORM! Build off the original form. Use params passed from foundCourse and palcehold with current data. User can update data. Any changes will over write current data in DB. Test with just title name.
+</h1>
+    
+<h1 class="h1">Edit <%= course.title %></h1>
+ 
+							
+    	<main class="addCourseMain">
+			<form action="/courses/<%= course._id %>?_method=PUT" method="POST" name="addCourse" class="addCourseForm">
+				<input type="text" class="addCourseForm__textInput" name="course[title]" value="<%= course.title %>" />
+				 <button>Submit!</button>
+				
+			</form>
+		</main>
+
+
+  <% include partials/footer %>
