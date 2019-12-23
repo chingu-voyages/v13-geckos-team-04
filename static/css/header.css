@@ -55,11 +55,25 @@
 	color: #fff;
 	
 }
+@media (max-width: 403px) {
+	.header {
+		flex-direction: column;
+		text-align: center;
+	}	
+	.header__nav {
+		line-height: 1.5rem;
+		width: 100%;
+		justify-content: center;
+	}
+}
 
 @media (max-width: 665px) {
+	.profileBtn {
+		margin: 0 0.5rem;
+	}
 	.header {
 		font-size: 1rem;
-		padding: 3px 5px;
+		padding: 3px 5px;	
 	}
 	.header__link--small, .header__text--small {
 		font-size: 0.5rem;
@@ -70,12 +84,12 @@
 	.searchForm__text, .searchForm__submit {
 		height: 1rem;
 		font-size: 0.5rem;
-	}
+	}	
 	.header__nav {
 		line-height: 1.5rem;
 	}
-	
 }
+
 @media (min-width: 665px) and (max-width: 800px) {
 	.header {
 		font-size: 1.5rem;
