@@ -16,19 +16,23 @@
 
 .header__nav {
 	display: flex;
-	justify-content: space-between;
+	justify-content: flex-end;
 	align-content: center;
+	font-size: 1rem;
+	line-height: 2rem;
+	width: 65%;
 }
 
 .searchForm {
 	margin-block-end: 0;
 	display: flex;
 	align-items: center;
+    width: 62%;
 }
 
 .searchForm__text {
 	line-height: 24px;
-	width: 300px;
+	width: 100%;
 	height: 2rem;
 	padding: 0 5px;
 	border-radius: 6px 0 0 6px;
@@ -43,15 +47,49 @@
 
 .profileBtn {
 	display: flex;
-	margin-left: 1em;
+	margin: 0 1em;
 }
 
-.header__nav {
-	font-size: 1rem;
-	line-height: 2rem;
-}
 
 .header__link--small, .header__text--small {
 	color: #fff;
+	
 }
 
+@media (max-width: 665px) {
+	.header {
+		font-size: 1rem;
+		padding: 3px 5px;
+	}
+	.header__link--small, .header__text--small {
+		font-size: 0.5rem;
+	}
+	.profileBtn img {
+		width: 1rem;
+	}
+	.searchForm__text, .searchForm__submit {
+		height: 1rem;
+		font-size: 0.5rem;
+	}
+	.header__nav {
+		line-height: 1.5rem;
+	}
+	
+}
+@media (min-width: 665px) and (max-width: 800px) {
+	.header {
+		font-size: 1.5rem;
+		padding: 6px 9px;
+	}
+	.header__link--small, .header__text--small {
+		font-size: 0.8rem;
+	}
+	.profileBtn img {
+		width: 1.5rem;
+	}
+	.searchForm__text, .searchForm__submit {
+		height: 1.5rem;
+		font-size: 0.8rem;
+	}
+	
+}
