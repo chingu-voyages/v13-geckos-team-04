@@ -6,7 +6,8 @@ const express               = require("express"),
 	  passport              = require("passport"),
 	  LocalStratagy         = require("passport-local"),
 	  passportLocalMongoose = require("passport-local-mongoose"),
-      User                  = require("./models/users");
+      User                  = require("./models/users"),
+	  Course                = require("./models/courses");
 
 require('dotenv/config');
 // Require routes - add models to routes files 
