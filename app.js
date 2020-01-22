@@ -43,20 +43,11 @@ app.use(require("express-session")({
 app.use(passport.initialize());
 app.use(passport.session());
 
-
-
-
 // Serve static 
 var path = require('path');
 app.use(express.static(path.join(__dirname, 'static')));
 // Allow PUT & DELETE methods by overriding POST method
 app.use(methodOverride("_method"));
-
-
-
-
-
-
 
 passport.use(new LocalStratagy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
@@ -68,11 +59,8 @@ passport.deserializeUser(User.deserializeUser());
 
 app.use("/", indexRoutes);
 app.use("/", courseRoutes);
-// Refactor comments using assoisciated data
-// app.use("/campgrounds/:id/comments", commentRoutes); 
-
-
-
+// Refactor comments using assoisciated data possibly?
+// app.use("/course/:id/comments", commentRoutes); 
 
 app.post("/search", (req, res) => {
 	var css = ["header", "footer", "global", "index"];
@@ -108,13 +96,10 @@ app.post("/search", (req, res) => {
 	}
 });
 
-
-
 app.get("/error", (req, res) => {
 	var css = ["header", "footer", "global"];
 	res.render("error", {css: css, user: req.user});
 });
-
 
 // Server listening 					  
 const port = process.env.PORT || 3000;
